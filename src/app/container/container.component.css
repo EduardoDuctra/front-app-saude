@@ -1,0 +1,66 @@
+.container-padrao {
+  border: 2px solid var(--cor-cinza-claro);
+  box-shadow: 5px 5px 10px rgba(100, 100, 100, 0.2);
+  border-radius: 20px;
+  height: 80vh;
+  min-width: 45vh;
+
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.cabecalho-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+}
+.imagem {
+  flex: 0 0 40%; /* 40% da largura do pai */
+  height: 100px; /* altura fixa, ou use height: 100% se quiser adaptar ao pai */
+  overflow: hidden; /* corta qualquer coisa que ultrapasse */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* cobre toda a div, mantendo proporção */
+  max-width: 100%; /* garante que não ultrapasse horizontal */
+  max-height: 100%; /* garante que não ultrapasse vertical */
+  display: block; /* remove gaps */
+}
+
+.titulo {
+  background-color: blueviolet;
+  height: 100px;
+  flex: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--cor-cinza-escuro);
+  text-transform: uppercase;
+  text-align: center;
+  word-break: break-word;
+}
+
+.conteudo {
+  background-color: rgb(132, 161, 122);
+  flex: 1; /* ocupa todo o espaço restante */
+  margin: 10px; /* margem de 10px em todos os lados */
+  box-sizing: border-box; /* considera a margem dentro do tamanho */
+  position: relative;
+}
+
+::ng-deep .conteudo p {
+  color: var(--cor-cinza-claro);
+}
+
+::ng-deep .conteudo p strong {
+  color: var(--cor-cinza-escuro);
+}

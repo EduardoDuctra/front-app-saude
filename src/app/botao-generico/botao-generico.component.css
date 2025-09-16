@@ -1,0 +1,22 @@
+.btn-generico {
+  background-color: var(--cor-cinza-escuro);
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  border: none;
+  width: 60%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  /* posicionamento absoluto dentro da .conteudo */
+  position: absolute;
+  bottom: 20px; /* distância da base da div */
+  left: 50%; /* centraliza horizontalmente */
+  transform: translateX(-50%);
+}
+
+.btn-generico:hover {
+  background-color: var(--cor-cinza-claro);
+}
