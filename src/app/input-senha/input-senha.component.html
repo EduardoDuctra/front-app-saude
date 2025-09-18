@@ -1,0 +1,16 @@
+<label for="senha">Senha</label>
+<div class="senha-container">
+  <input
+    id="senha"
+    [type]="hidePassword ? 'password' : 'text'"
+    [(ngModel)]="senha"
+    placeholder="Digite sua senha"
+    required
+  />
+  <img
+    src="assets/olho.svg"
+    alt="Mostrar/Ocultar senha"
+    class="icone-botao"
+    (click)="togglePassword()"
+  />
+</div>

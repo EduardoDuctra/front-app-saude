@@ -1,0 +1,48 @@
+.login {
+  border: 2px solid var(--cor-cinza-claro);
+  height: 60vh;
+  width: 60vh;
+  border-radius: 40px;
+  box-shadow: var(--cor-cinza-escuro);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+app-input-form,
+app-input-senha {
+  width: 80%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+button {
+  width: 45%; /* agora o botão tem a mesma largura dos inputs */
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 20px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
