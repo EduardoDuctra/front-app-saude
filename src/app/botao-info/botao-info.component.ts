@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-botao-info',
@@ -8,4 +8,11 @@ import { Component, Input } from '@angular/core';
 })
 export class BotaoInfoComponent {
   @Input() titulo: string = '';
+
+  @Output() clickBotao = new EventEmitter<void>(); // novo evento
+
+  onClick() {
+    this.clickBotao.emit();
+    console.log('Botão clicado');
+  }
 }

@@ -1,7 +1,19 @@
 <div class="login">
   <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-    <app-input-form [(ngModel)]="email" name="email"></app-input-form>
-    <app-input-senha [(ngModel)]="senha" name="senha"></app-input-senha>
+    <input
+      type="email"
+      [(ngModel)]="email"
+      name="email"
+      placeholder="Digite seu email"
+      required
+    />
+    <input
+      type="password"
+      [(ngModel)]="senha"
+      name="senha"
+      placeholder="Digite sua senha"
+      required
+    />
     <button type="submit">Entrar</button>
   </form>
 </div>

@@ -1,0 +1,67 @@
+{
+  "usuario": {
+    "codUsuario": 1,
+    "uuidUsuario": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+    "conta": {
+      "email": "e@email.com",
+      "senha": "123"
+    },
+    "perfil": {
+      "nome": "Usuario 1",
+      "sexo": "M",
+      "altura": 1.73
+    },
+    "dados": [
+      {
+        "codDado": 1,
+        "uuid_dado": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+        "peso": 70.5,
+        "glicose": 95,
+        "colesterolHDL": 60,
+        "colesterolVLDL": 20,
+        "creatina": 1,
+        "trigliceridio": 150
+      },
+      {
+        "codDado": 2,
+        "uuid_dado": "9c858901-8a57-4791-81fe-4c455b099bc9",
+        "peso": 71.2,
+        "glicose": 100,
+        "colesterolHDL": 58,
+        "colesterolVLDL": 22,
+        "creatina": 1,
+        "trigliceridio": 155
+      }
+    ],
+    "medicamentos": [
+      {
+        "codMedicamento": 1,
+        "uuidMedicamento": "550e8400-e29b-41d4-a716-446655440000",
+        "nomeMedicamento": "Medicamento 1",
+        "duracaoTratamento": 5,
+        "dataInicio": "2025-09-15",
+        "doseDiaria": 2
+      },
+      {
+        "codMedicamento": 2,
+        "uuidMedicamento": "123e4567-e89b-12d3-a456-426614174000",
+        "nomeMedicamento": "Medicamento 2",
+        "duracaoTratamento": 10,
+        "dataInicio": "2025-09-18",
+        "doseDiaria": 1
+      }
+    ],
+    "relatorios": [
+      {
+        "codUsuario": 1,
+        "codDado": 1,
+        "data": "2025-09-15"
+      },
+      {
+        "codUsuario": 1,
+        "codDado": 2,
+        "data": "2025-09-20"
+      }
+    ]
+  }
+}

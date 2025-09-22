@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { GraficoComponent } from './grafico/grafico.component';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,4 @@ import { Component } from '@angular/core';
   standalone: false,
   styleUrl: './app.component.css',
 })
-export class AppComponent {
-  title = 'front-sistema-saude';
-}
+export class AppComponent {}

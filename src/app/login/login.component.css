@@ -23,15 +23,19 @@ form {
   align-items: center;
 }
 
-app-input-form,
-app-input-senha {
+input {
   width: 80%;
   max-width: 400px;
   margin-bottom: 20px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid var(--cor-cinza-claro);
+  box-sizing: border-box;
 }
 
 button {
-  width: 45%; /* agora o botão tem a mesma largura dos inputs */
+  width: 45%;
   padding: 10px;
   font-size: 16px;
   border-radius: 20px;
