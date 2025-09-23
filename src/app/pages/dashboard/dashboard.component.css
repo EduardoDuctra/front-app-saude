@@ -17,3 +17,8 @@ body {
 .botoes-dashboard app-botao-info {
   margin-bottom: 20px; /* espaçamento entre os botões */
 }
+
+app-botao-remedio {
+  margin-bottom: 20px;
+  display: block; /* garante que a margin funcione corretamente */
+}

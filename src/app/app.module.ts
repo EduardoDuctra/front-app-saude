@@ -14,12 +14,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { InputFormComponent } from './input-form/input-form.component';
-import { InputSenhaComponent } from './input-senha/input-senha.component';
+
 import { LoginComponent } from './login/login.component';
 import { ModalComponent } from './modal/modal.component';
 import { GraficoComponent } from './grafico/grafico.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BotaoRemedioComponent } from './botao-remedio/botao-remedio.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,13 +28,14 @@ import { HttpClientModule } from '@angular/common/http';
     BotaoGenericoComponent,
     BotaoInfoComponent,
     InputFormComponent,
-    InputSenhaComponent,
     LoginComponent,
     ModalComponent,
     GraficoComponent,
     ModalComponent,
     GraficoComponent,
     DashboardComponent,
+    BotaoRemedioComponent,
+    BotaoRemedioComponent,
   ],
   imports: [
     BrowserModule,

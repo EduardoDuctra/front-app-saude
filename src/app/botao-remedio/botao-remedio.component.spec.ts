@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputSenhaComponent } from './input-senha.component';
+import { BotaoRemedioComponent } from './botao-remedio.component';
 
-describe('InputSenhaComponent', () => {
-  let component: InputSenhaComponent;
-  let fixture: ComponentFixture<InputSenhaComponent>;
+describe('BotaoRemedioComponent', () => {
+  let component: BotaoRemedioComponent;
+  let fixture: ComponentFixture<BotaoRemedioComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InputSenhaComponent]
+      declarations: [BotaoRemedioComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(InputSenhaComponent);
+    fixture = TestBed.createComponent(BotaoRemedioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

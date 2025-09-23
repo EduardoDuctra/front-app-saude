@@ -1,5 +1,13 @@
 <div class="linha-containers">
   <app-container titulo="Suas medicações" imagem="assets/vector.svg">
+    <ng-container *ngFor="let med of usuario.medicamentos">
+      <app-botao-remedio
+        [nome]="med.nomeMedicamento"
+        [doseDiaria]="med.doseDiaria"
+        [dataInicio]="med.dataInicio"
+        [duracao]="med.duracaoTratamento"
+      ></app-botao-remedio>
+    </ng-container>
     <app-botao-generico titulo="Adicionar medicação"></app-botao-generico>
   </app-container>
 
