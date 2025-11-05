@@ -12,6 +12,10 @@ export class BotaoRemedioComponent {
   @Input() dataInicio!: string;
   @Input() duracao!: number;
 
+  ngOnInit() {
+    console.log('Nome do remédio recebido:', this.nome);
+  }
+
   // Calcula a data de fim do tratamento
   get dataFim(): string {
     const inicio = new Date(this.dataInicio);

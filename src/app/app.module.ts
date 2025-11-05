@@ -21,6 +21,21 @@ import { GraficoComponent } from './grafico/grafico.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BotaoRemedioComponent } from './botao-remedio/botao-remedio.component';
+import { ModalMedicamentoComponent } from './modal-medicamento/modal-medicamento.component';
+import { NavbarComponent } from './navbar/navbar.component';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { PaginaDadosComponent } from './pages/pagina-dados/pagina-dados.component';
+import { PaginaRelatoriosComponent } from './pages/pagina-relatorios/pagina-relatorios.component';
+import { CardRelatorioComponent } from './card-relatorio/card-relatorio.component';
+
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +51,11 @@ import { BotaoRemedioComponent } from './botao-remedio/botao-remedio.component';
     DashboardComponent,
     BotaoRemedioComponent,
     BotaoRemedioComponent,
+    ModalMedicamentoComponent,
+    NavbarComponent,
+    PaginaDadosComponent,
+    PaginaRelatoriosComponent,
+    CardRelatorioComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +67,17 @@ import { BotaoRemedioComponent } from './botao-remedio/botao-remedio.component';
     MatInputModule,
     MatIconModule,
     HttpClientModule,
+
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatDividerModule,
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

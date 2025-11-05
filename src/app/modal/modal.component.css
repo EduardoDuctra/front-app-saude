@@ -15,7 +15,7 @@
   background-color: var(--cor-cinza-claro);
   border-radius: 8px;
   padding: 20px;
-  width: 50%; /* ocupa 50% da largura da tela */
+  width: 45%; /* ocupa 50% da largura da tela */
   height: 50%;
   text-align: center; /* centraliza o conteúdo do modal */
   position: relative; /* necessário para posicionar o botão X */

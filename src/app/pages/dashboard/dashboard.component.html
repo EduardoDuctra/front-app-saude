@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <div class="linha-containers">
   <app-container titulo="Suas medicações" imagem="assets/vector.svg">
     <ng-container *ngFor="let med of usuario.medicamentos">
@@ -6,6 +8,7 @@
         [doseDiaria]="med.doseDiaria"
         [dataInicio]="med.dataInicio"
         [duracao]="med.duracaoTratamento"
+        (click)="medicamentoSelecionado = med"
       ></app-botao-remedio>
     </ng-container>
     <app-botao-generico titulo="Adicionar medicação"></app-botao-generico>
@@ -22,6 +25,8 @@
         [titulo]="botao"
         (clickBotao)="abrirModal(botao)"
       ></app-botao-info>
+
+      <app-botao-generico titulo="Adicionar dados"></app-botao-generico>
     </div>
   </app-container>
 
@@ -33,7 +38,10 @@
     <p><strong>35 – 39,9</strong> — Obesidade grau II</p>
     <p><strong>40 ou mais</strong> — Obesidade grau III</p>
 
-    <app-botao-generico titulo="Calcular seu IMC"></app-botao-generico>
+    <!-- <app-botao-generico titulo="Calcular seu IMC"></app-botao-generico> -->
+
+    <app-botao-generico [titulo]="tituloBotaoIMC" (click)="calcularIMC()">
+    </app-botao-generico>
   </app-container>
 </div>
 
@@ -42,3 +50,12 @@
   <h2>{{ modalTitulo }}</h2>
   <app-grafico *ngIf="modalAberto" [data]="data"></app-grafico>
 </app-modal>
+
+<!-- Modal de medicamento -->
+<app-modal-medicamento
+  [show]="medicamentoSelecionado != null"
+  [medicamento]="medicamentoSelecionado"
+  (fechar)="medicamentoSelecionado = null"
+  (medicamentoAtualizado)="atualizarListaMedicamento($event)"
+  (medicamentoRemovido)="removerDaLista($event)"
+></app-modal-medicamento>

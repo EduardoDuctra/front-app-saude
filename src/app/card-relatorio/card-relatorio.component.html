@@ -1,0 +1,15 @@
+<button class="btn-relatorio">
+  <h3>Relatório - {{ dataBR }}</h3>
+  <hr />
+  <p>Peso: {{ relatorio.peso }}</p>
+  <p>Glicose: {{ relatorio.glicose }}</p>
+  <p>Colesterol HDL: {{ relatorio.colesterolHDL }}</p>
+  <p>Colesterol VLDL: {{ relatorio.colesterolVLDL }}</p>
+  <p>Creatina: {{ relatorio.creatina }}</p>
+  <p>Triglicerídio: {{ relatorio.trigliceridio }}</p>
+
+  <div class="acao-relatorio">
+    <button (click)="editar.emit(relatorio)">Editar</button>
+    <button (click)="excluir.emit(relatorio)">Excluir</button>
+  </div>
+</button>
