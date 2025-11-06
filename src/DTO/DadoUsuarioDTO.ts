@@ -1,7 +1,12 @@
 export interface DadoUsuarioDTO {
-  id: number;
-  nome: string;
-  email: string;
-  permissao: string;
-  altura: number;
+  conta: {
+    email: string;
+    senha: string;
+    permissao: string;
+  };
+  perfil: {
+    nome: string;
+    sexo: string;
+    altura: number;
+  };
 }

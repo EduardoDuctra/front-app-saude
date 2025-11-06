@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.usuarioSub = this.authService.usuarioLogado$.subscribe((usuario) => {
       this.currentUser = usuario;
       this.isLoggedIn = !!usuario;
-      this.userRole = usuario ? usuario.permissao : '';
+      this.userRole = usuario ? usuario.conta.permissao : '';
       console.log('Usuário logado:', usuario); // 🔹 Debug do usuário
     });
 
@@ -53,7 +53,21 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // Menu usuário comum
   meusDados() {
     console.log('Abrir meus dados');
-    this.router.navigate(['/meus-dados']);
+
+    if (!this.currentUser) {
+      console.warn('Usuário não logado, não é possível abrir meus dados');
+      return;
+    }
+
+    this.router.navigate(['/meus-dados'], {
+      state: {
+        usuario: this.currentUser,
+        tipoCadastro:
+          this.currentUser.conta.permissao === 'farmacia'
+            ? 'farmacia'
+            : 'usuario',
+      },
+    });
   }
 
   // Menu admin

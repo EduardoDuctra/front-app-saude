@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +34,10 @@ import { CardRelatorioComponent } from './card-relatorio/card-relatorio.componen
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { FormularioUsuarioComponent } from './formulario-usuario/formulario-usuario.component';
+import { MeusDadosComponent } from './pages/meus-dados/meus-dados.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PaginaCadastroComponent } from './pagina-cadastro/pagina-cadastro.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     PaginaDadosComponent,
     PaginaRelatoriosComponent,
     CardRelatorioComponent,
+    PaginaCadastroComponent,
+    FormularioUsuarioComponent,
+    MeusDadosComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +84,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

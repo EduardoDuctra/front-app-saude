@@ -21,14 +21,14 @@
         matTooltip="Opções do usuário"
       >
         <mat-icon>person</mat-icon>
-        <span>{{ currentUser?.nome }}</span>
+        <span>{{ currentUser?.perfil?.nome }}</span>
         <!-- ✨ Nome do usuário -->
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
 
       <mat-menu #userMenu="matMenu">
         <div class="user-menu-header">
-          <h3>{{ currentUser?.nome }}</h3>
+          <h3>{{ currentUser?.perfil?.nome }}</h3>
           <!-- ✨ Nome do usuário -->
           <p>{{ userRole }}</p>
         </div>

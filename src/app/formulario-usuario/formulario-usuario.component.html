@@ -1,0 +1,53 @@
+<div class="login">
+  <h2>
+    {{
+      tipoCadastro === "farmacia"
+        ? "Cadastro de Farmácia"
+        : "Cadastro de Usuário"
+    }}
+  </h2>
+
+  <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+    <!-- Conta -->
+    <div formGroupName="conta" class="form-group">
+      <input formControlName="email" type="email" placeholder="Email" />
+      <input formControlName="senha" type="password" placeholder="Senha" />
+    </div>
+
+    <!-- Perfil -->
+    <div formGroupName="perfil" class="form-group">
+      <input formControlName="nome" type="text" placeholder="Nome" />
+
+      <!-- Sexo e altura ocultos para farmácia -->
+      <input formControlName="sexo" type="hidden" />
+      <input formControlName="altura" type="hidden" />
+
+      <select
+        *ngIf="tipoCadastro !== 'farmacia'"
+        formControlName="sexo"
+        class="select"
+      >
+        <option value="M">Masculino</option>
+        <option value="F">Feminino</option>
+      </select>
+
+      <input
+        *ngIf="tipoCadastro !== 'farmacia'"
+        formControlName="altura"
+        type="number"
+        step="0.01"
+        placeholder="Altura (ex: 1.80)"
+      />
+    </div>
+
+    <!-- Campos exclusivos para farmácia -->
+    <div *ngIf="tipoCadastro === 'farmacia'" class="form-group">
+      <input formControlName="cnpj" type="text" placeholder="CNPJ" />
+      <input formControlName="telefone" type="text" placeholder="Telefone" />
+    </div>
+
+    <button type="submit">
+      {{ isEditing ? "Atualizar" : "Cadastrar" }}
+    </button>
+  </form>
+</div>
