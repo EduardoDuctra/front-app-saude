@@ -37,4 +37,15 @@ export class FarmaciaService {
       headers,
     });
   }
+
+  listarFarmacias(): Observable<DadoFarmaciaDTO[]> {
+    const token = sessionStorage.getItem('token') || '';
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    return this.http.get<DadoFarmaciaDTO[]>(
+      `${this.baseUrl}/listar-farmacias`,
+      {
+        headers,
+      }
+    );
+  }
 }

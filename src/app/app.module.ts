@@ -28,7 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { PaginaDadosComponent } from './pages/pagina-dados/pagina-dados.component';
+
 import { PaginaRelatoriosComponent } from './pages/pagina-relatorios/pagina-relatorios.component';
 import { CardRelatorioComponent } from './card-relatorio/card-relatorio.component';
 
@@ -38,6 +38,12 @@ import { FormularioUsuarioComponent } from './formulario-usuario/formulario-usua
 import { MeusDadosComponent } from './pages/meus-dados/meus-dados.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginaCadastroComponent } from './pagina-cadastro/pagina-cadastro.component';
+import { CardUsuarioComponent } from './card-usuario/card-usuario.component';
+import { PaginaUsuariosComponent } from './pages/pagina-usuarios/pagina-usuarios.component';
+import { PaginaCadastroMedicamentoComponent } from './pages/pagina-cadastro-medicamento/pagina-cadastro-medicamento.component';
+import { InputCadastroMedicamentoComponent } from './input-cadastro-medicamento/input-cadastro-medicamento.component';
+import { PaginaListarMedicamentosComponent } from './pages/pagina-listar-medicamentos/pagina-listar-medicamentos.component';
+import { CardMedicamentoComponent } from './card-medicamento/card-medicamento.component';
 
 @NgModule({
   declarations: [
@@ -56,12 +62,17 @@ import { PaginaCadastroComponent } from './pagina-cadastro/pagina-cadastro.compo
     BotaoRemedioComponent,
     ModalMedicamentoComponent,
     NavbarComponent,
-    PaginaDadosComponent,
     PaginaRelatoriosComponent,
     CardRelatorioComponent,
     PaginaCadastroComponent,
     FormularioUsuarioComponent,
     MeusDadosComponent,
+    CardUsuarioComponent,
+    PaginaUsuariosComponent,
+    PaginaCadastroMedicamentoComponent,
+    InputCadastroMedicamentoComponent,
+    PaginaListarMedicamentosComponent,
+    CardMedicamentoComponent,
   ],
   imports: [
     BrowserModule,

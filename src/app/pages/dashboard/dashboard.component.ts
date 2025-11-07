@@ -1,9 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GraficoComponent } from '../../grafico/grafico.component';
-import {
-  Medicamento,
-  MedicamentoService,
-} from '../../service/medicamento.service';
+import { MedicamentoService } from '../../service/medicamento.service';
 import { MedicamentoDTO } from '../../../DTO/MedicamentoDTO';
 import { DadosService } from '../../service/dados.service';
 import { DadosDTO } from '../../../DTO/DadosDTO';

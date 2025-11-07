@@ -41,4 +41,12 @@ export class UsuarioService {
       headers,
     });
   }
+
+  listarUsuarios(): Observable<DadoUsuarioDTO[]> {
+    const token = sessionStorage.getItem('token') || '';
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    return this.http.get<DadoUsuarioDTO[]>(`${this.baseUrl}/listar-usuarios`, {
+      headers,
+    });
+  }
 }

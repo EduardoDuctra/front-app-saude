@@ -73,12 +73,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // Menu admin
   listarUsuarios() {
     console.log('Abrir lista de usuários');
-    this.router.navigate(['/listar-usuarios']);
+    this.router.navigate(['/listar-usuarios', 'usuario']);
+  }
+
+  listarFarmacias() {
+    console.log('Abrir lista de farmácias');
+    this.router.navigate(['/listar-usuarios', 'farmacia']);
   }
 
   cadastrarMedicamento() {
     console.log('Abrir cadastro de medicamentos');
     this.router.navigate(['/cadastrar-medicamento']);
+  }
+
+  listarMedicamento() {
+    console.log('Abrir listar medicamentos');
+    this.router.navigate(['/listar-medicamentos']);
   }
 
   meusRelatorios() {
@@ -90,6 +100,4 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.router.navigate(['/dashboard']);
     console.log('Indo para página inicial');
   }
-
-  listarFarmacias() {}
 }

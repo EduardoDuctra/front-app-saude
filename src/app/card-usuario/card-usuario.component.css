@@ -1,0 +1,35 @@
+.card-usuario {
+  background-color: var(--cor-cinza-claro);
+  border-radius: 20px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.card-usuario:hover {
+  background-color: var(--cor-cinza-escuro);
+}
+
+.card-usuario h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.card-usuario hr {
+  width: 100%;
+  margin: 8px 0;
+  border: 0;
+  border-top: 1px solid #000000;
+}
+
+.card-usuario p {
+  margin: 4px 0;
+  font-size: 16px;
+  color: #000;
+}

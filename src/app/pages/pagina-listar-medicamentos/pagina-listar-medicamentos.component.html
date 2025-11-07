@@ -1,0 +1,15 @@
+<app-navbar></app-navbar>
+
+<div class="pagina-lista-medicamentos">
+  <h2>Lista de Medicamentos</h2>
+
+  <div class="lista-medicamentos">
+    <div *ngFor="let med of listaMedicamentos">
+      <app-card-medicamento
+        [medicamento]="med"
+        (excluir)="removerMedicamento($event)"
+      >
+      </app-card-medicamento>
+    </div>
+  </div>
+</div>

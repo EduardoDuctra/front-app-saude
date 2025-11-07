@@ -3,17 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MedicamentoDTO } from '../../DTO/MedicamentoDTO';
 
-export interface Medicamento {
-  codMedicamento: number;
-  duracaoTratamento: number;
-  dataInicio: string;
-  doseDiaria: number;
-  bancoMedicamentos: {
-    codNomeMedicamento: number;
-    nome: string;
-  } | null;
-}
-
 @Injectable({
   providedIn: 'root',
 })

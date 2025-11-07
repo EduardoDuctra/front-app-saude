@@ -1,0 +1,37 @@
+.card-medicamento {
+  background-color: var(--cor-cinza-claro);
+  border-radius: 20px;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  cursor: default;
+  transition: background-color 0.3s ease;
+}
+
+.card-medicamento:hover {
+  background-color: var(--cor-cinza-escuro);
+}
+
+.card-medicamento h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.btn-excluir {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-excluir:hover {
+  background-color: #c0392b;
+}
