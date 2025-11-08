@@ -8,10 +8,13 @@
         [doseDiaria]="med.doseDiaria"
         [dataInicio]="med.dataInicio"
         [duracao]="med.duracaoTratamento"
-        (click)="medicamentoSelecionado = med"
+        (click)="abrirModalEditarMedicamento(med)"
       ></app-botao-remedio>
     </ng-container>
-    <app-botao-generico titulo="Adicionar medicação"></app-botao-generico>
+    <app-botao-generico
+      titulo="Adicionar medicação"
+      (click)="abrirModalAdicionarMedicamento()"
+    ></app-botao-generico>
   </app-container>
 
   <app-container
@@ -53,9 +56,11 @@
 
 <!-- Modal de medicamento -->
 <app-modal-medicamento
-  [show]="medicamentoSelecionado != null"
+  [show]="show"
+  [modoAdicionar]="modoAdicionar"
   [medicamento]="medicamentoSelecionado"
-  (fechar)="medicamentoSelecionado = null"
+  (fechar)="fecharModal()"
+  (medicamentoAdicionado)="carregarMedicamentos()"
   (medicamentoAtualizado)="atualizarListaMedicamento($event)"
   (medicamentoRemovido)="removerDaLista($event)"
 ></app-modal-medicamento>

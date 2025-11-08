@@ -43,4 +43,14 @@ export class MedicamentoService {
       headers,
     });
   }
+
+  adicionarMedicamento(med: MedicamentoDTO): Observable<MedicamentoDTO> {
+    const token = sessionStorage.getItem('token') || '';
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<MedicamentoDTO>(`${this.baseUrl}/salvar`, med, {
+      headers,
+    });
+  }
 }

@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MedicamentoDTO } from '../../DTO/MedicamentoDTO';
 import { MedicamentoService } from '../service/medicamento.service';
+import { BancoMedicamentoService } from '../service/bancoMedicamento.service';
+import { BancoMedicamentoDTO } from '../../DTO/BancoMedicamentoDTO';
 
 @Component({
   selector: 'app-modal-medicamento',
@@ -9,14 +11,34 @@ import { MedicamentoService } from '../service/medicamento.service';
   styleUrl: './modal-medicamento.component.css',
 })
 export class ModalMedicamentoComponent {
-  @Input() show: boolean = false; // controla se o modal aparece
-  @Input() medicamento: MedicamentoDTO | null = null; // medicamento selecionado
+  @Input() show: boolean = false;
+  @Input() medicamento: MedicamentoDTO | null = null;
+  @Input() modoAdicionar: boolean = false;
 
-  @Output() fechar = new EventEmitter<void>(); // para fechar o modal
-  @Output() medicamentoAtualizado = new EventEmitter<MedicamentoDTO>(); // para atualizar a lista no dashboard
-  @Output() medicamentoRemovido = new EventEmitter<number>(); // codMedicamento removido
+  @Output() fechar = new EventEmitter<void>();
+  @Output() medicamentoAtualizado = new EventEmitter<MedicamentoDTO>();
+  @Output() medicamentoRemovido = new EventEmitter<number>();
+  @Output() medicamentoAdicionado = new EventEmitter<MedicamentoDTO>();
 
-  constructor(private medService: MedicamentoService) {}
+  listaMedicamentos: BancoMedicamentoDTO[] = [];
+
+  constructor(
+    private medService: MedicamentoService,
+    private bancoService: BancoMedicamentoService
+  ) {}
+
+  ngOnInit(): void {
+    this.bancoService.listarMedicamentos().subscribe({
+      next: (dados) => {
+        this.listaMedicamentos = dados || [];
+        console.log(
+          '📦 Medicamentos disponíveis no banco:',
+          this.listaMedicamentos.map((m) => m.nome)
+        );
+      },
+      error: (err) => console.error('❌ Erro ao carregar medicamentos', err),
+    });
+  }
 
   fecharModal() {
     this.fechar.emit();
@@ -25,32 +47,70 @@ export class ModalMedicamentoComponent {
   salvar() {
     if (!this.medicamento) return;
 
-    this.medService.atualizarMedicamento(this.medicamento).subscribe({
-      next: (updated: MedicamentoDTO) => {
-        // preserva o nome
-        const medicamentoComNome = {
-          ...updated,
-          nomeMedicamento: this.medicamento!.nomeMedicamento,
-        };
+    // Busca o medicamento selecionado no dropdown
+    const selecionado = this.listaMedicamentos.find(
+      (m) => m.nome === this.medicamento?.nomeMedicamento
+    );
 
-        this.medicamentoAtualizado.emit(medicamentoComNome); // envia para o dashboard
-        this.fecharModal();
+    if (!selecionado) {
+      console.error('❌ Nenhum medicamento selecionado no dropdown.');
+      return;
+    }
+
+    // Verifica se temos codMedicamento (necessário para atualização)
+    if (!this.modoAdicionar && !this.medicamento.codMedicamento) {
+      console.error(
+        '❌ Medicamento sem codMedicamento não pode ser atualizado.'
+      );
+      return;
+    }
+
+    // Monta o objeto no formato esperado pelo backend
+    const objetoParaEnviar: MedicamentoDTO & { codMedicamento: number } = {
+      bancoMedicamentos: {
+        codNomeMedicamento: selecionado.codNomeMedicamento,
+        nome: selecionado.nome,
       },
-      error: (err: any) => console.error('Erro ao atualizar medicamento', err),
-    });
+      nomeMedicamento: selecionado.nome,
+      codMedicamento: this.medicamento.codMedicamento || 0, // 0 no caso de adicionar
+      doseDiaria: this.medicamento.doseDiaria!,
+      dataInicio: this.medicamento.dataInicio!,
+      duracaoTratamento: this.medicamento.duracaoTratamento!,
+    };
+
+    if (this.modoAdicionar) {
+      // ✅ Adição
+      this.medService.adicionarMedicamento(objetoParaEnviar).subscribe({
+        next: (novo) => {
+          this.medicamentoAdicionado.emit(novo);
+          this.fecharModal();
+        },
+        error: (err) => console.error('❌ Erro ao adicionar medicamento', err),
+      });
+    } else {
+      // ✅ Atualização
+      this.medService.atualizarMedicamento(objetoParaEnviar).subscribe({
+        next: (updated) => {
+          this.medicamentoAtualizado.emit(updated);
+          this.fecharModal();
+          window.location.reload();
+        },
+        error: (err) => console.error('❌ Erro ao atualizar medicamento', err),
+      });
+    }
   }
 
   excluir() {
     if (!this.medicamento) return;
 
     this.medService
-      .excluirMedicamento(this.medicamento.codMedicamento)
+      .excluirMedicamento(this.medicamento.codMedicamento!)
       .subscribe({
         next: () => {
-          this.medicamentoRemovido.emit(this.medicamento!.codMedicamento); // envia o codMedicamento removido
+          this.medicamentoRemovido.emit(this.medicamento!.codMedicamento!);
           this.fecharModal();
         },
-        error: (err: any) => console.error('Erro ao excluir medicamento', err),
+        error: (err) => console.error('Erro ao excluir medicamento', err),
       });
   }
 }

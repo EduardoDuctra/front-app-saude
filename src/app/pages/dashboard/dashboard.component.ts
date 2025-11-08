@@ -22,6 +22,9 @@ export class DashboardComponent implements OnInit {
   botoes: string[] = [];
   data: any = { labels: [], datasets: [] };
 
+  show = false; // controla exibição do modal
+  modoAdicionar = false; // controla o modo (adicionar ou editar)
+
   medicamentoSelecionado: MedicamentoDTO | null = null;
 
   constructor(
@@ -146,10 +149,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  fecharModal() {
-    this.modalAberto = false;
-  }
-
   // Atualiza a lista de medicamentos quando um medicamento é salvo
   atualizarListaMedicamento(updated: MedicamentoDTO) {
     const index = this.usuario.medicamentos.findIndex(
@@ -177,5 +176,29 @@ export class DashboardComponent implements OnInit {
       },
       error: (err) => console.error(err),
     });
+  }
+
+  abrirModalAdicionarMedicamento() {
+    this.modoAdicionar = true; // modo adicionar
+    this.show = true; // abre o modal
+    this.medicamentoSelecionado = {
+      nomeMedicamento: '',
+      doseDiaria: 0,
+      dataInicio: new Date().toISOString().split('T')[0],
+      duracaoTratamento: 0,
+    } as MedicamentoDTO;
+  }
+
+  abrirModalEditarMedicamento(med: MedicamentoDTO) {
+    this.modoAdicionar = false; // entra no modo de edição
+    this.show = true; // abre o modal
+    this.medicamentoSelecionado = { ...med }; // clona o medicamento selecionado
+  }
+
+  fecharModal() {
+    this.modalAberto = false; // fecha modal de gráfico
+    this.show = false; // fecha modal de medicamento
+    this.modoAdicionar = false;
+    this.medicamentoSelecionado = null;
   }
 }

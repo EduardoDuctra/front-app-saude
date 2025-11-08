@@ -1,9 +1,19 @@
-<!-- modal-medicamento.component.html -->
 <app-modal [show]="show" (close)="fecharModal()">
-  <h2>Editar Medicação</h2>
+  <h2>{{ modoAdicionar ? "Adicionar Medicação" : "Editar Medicação" }}</h2>
 
-  <div *ngIf="medicamento">
-    <p><strong>Nome:</strong> {{ medicamento?.nomeMedicamento }}</p>
+  <ng-container *ngIf="medicamento">
+    <label for="nome"><strong>Nome:</strong></label>
+    <select
+      id="nome"
+      [(ngModel)]="medicamento.nomeMedicamento"
+      [disabled]="!modoAdicionar"
+      class="campo-select"
+    >
+      <option value="">Selecione...</option>
+      <option *ngFor="let m of listaMedicamentos" [value]="m.nome">
+        {{ m.nome }}
+      </option>
+    </select>
 
     <label for="dose">Dose diária:</label>
     <input
@@ -11,10 +21,16 @@
       type="number"
       [(ngModel)]="medicamento.doseDiaria"
       placeholder="Dose diária"
+      class="campo-input"
     />
 
     <label for="dataInicio">Data de início:</label>
-    <input id="dataInicio" type="date" [(ngModel)]="medicamento.dataInicio" />
+    <input
+      id="dataInicio"
+      type="date"
+      [(ngModel)]="medicamento.dataInicio"
+      class="campo-input"
+    />
 
     <label for="duracao">Duração (dias):</label>
     <input
@@ -22,12 +38,15 @@
       type="number"
       [(ngModel)]="medicamento.duracaoTratamento"
       placeholder="Duração do tratamento"
+      class="campo-input"
     />
 
     <div class="botoes-modal">
       <button class="btn-salvar" (click)="salvar()">Salvar</button>
-      <button class="btn-excluir" (click)="excluir()">Excluir</button>
+      <button class="btn-excluir" *ngIf="!modoAdicionar" (click)="excluir()">
+        Excluir
+      </button>
       <button class="btn-fechar" (click)="fecharModal()">Fechar</button>
     </div>
-  </div>
+  </ng-container>
 </app-modal>
