@@ -60,11 +60,26 @@ button {
   background-color: #c0392b;
 }
 
-.btn-fechar {
+.btn-recolhimento {
   background-color: #bdc3c7;
   color: #333;
 }
 
-.btn-fechar:hover {
+.btn-recolhimento:hover {
   background-color: #95a5a6;
+}
+
+/* Select parecido com input */
+.campo-select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background-color: #fff; /* garante fundo branco */
+  color: #333; /* cor do texto */
+  appearance: none; /* remove a seta padrão em alguns navegadores */
+  cursor: pointer;
 }

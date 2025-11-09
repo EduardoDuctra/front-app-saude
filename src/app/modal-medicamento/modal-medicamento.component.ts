@@ -3,6 +3,8 @@ import { MedicamentoDTO } from '../../DTO/MedicamentoDTO';
 import { MedicamentoService } from '../service/medicamento.service';
 import { BancoMedicamentoService } from '../service/bancoMedicamento.service';
 import { BancoMedicamentoDTO } from '../../DTO/BancoMedicamentoDTO';
+import { RecolhimentoDTO } from '../../DTO/RecolhimentoDTO';
+import { RecolhimentoService } from '../service/RecolhimentoService';
 
 @Component({
   selector: 'app-modal-medicamento',
@@ -24,7 +26,8 @@ export class ModalMedicamentoComponent {
 
   constructor(
     private medService: MedicamentoService,
-    private bancoService: BancoMedicamentoService
+    private bancoService: BancoMedicamentoService,
+    private recolhimentoService: RecolhimentoService
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +45,26 @@ export class ModalMedicamentoComponent {
 
   fecharModal() {
     this.fechar.emit();
+  }
+
+  solicitarRecolhimento() {
+    if (!this.medicamento?.codMedicamento) {
+      console.error('❌ Nenhum medicamento selecionado.');
+      return;
+    }
+
+    const recolhimento: RecolhimentoDTO = {
+      medicamento: { codMedicamento: this.medicamento.codMedicamento },
+    };
+
+    this.recolhimentoService.solicitarRecolhimento(recolhimento).subscribe({
+      next: (res) => {
+        console.log('✅ Recolhimento solicitado:', res);
+        this.fecharModal();
+        alert('Recolhimento solicitado com sucesso!');
+      },
+      error: (err) => console.error('❌ Erro ao solicitar recolhimento', err),
+    });
   }
 
   salvar() {

@@ -1,24 +1,7 @@
 <app-navbar></app-navbar>
 
-<!-- Busca por data -->
-<div class="busca-relatorios">
-  <mat-form-field appearance="outline">
-    <mat-label>Buscar por data</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="dataBusca" />
-    <!-- Toggle do datepicker -->
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-
-    <!-- Botão de reset dentro do mat-form-field -->
-    <button
-      mat-icon-button
-      matSuffix
-      (click)="resetarBusca()"
-      aria-label="Resetar data"
-    >
-      <mat-icon>refresh</mat-icon>
-    </button>
-  </mat-form-field>
+<div class="top-bar">
+  <button class="botao-redondo">+</button>
 </div>
 
 <div *ngIf="carregando">Carregando relatórios...</div>
