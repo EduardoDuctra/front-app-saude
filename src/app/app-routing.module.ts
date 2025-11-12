@@ -9,6 +9,7 @@ import { PaginaCadastroComponent } from './pagina-cadastro/pagina-cadastro.compo
 import { PaginaUsuariosComponent } from './pages/pagina-usuarios/pagina-usuarios.component';
 import { PaginaCadastroMedicamentoComponent } from './pages/pagina-cadastro-medicamento/pagina-cadastro-medicamento.component';
 import { PaginaListarMedicamentosComponent } from './pages/pagina-listar-medicamentos/pagina-listar-medicamentos.component';
+import { AdminGuard } from './guards/admGuard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // rota inicial
@@ -18,14 +19,21 @@ const routes: Routes = [
   { path: 'pagina-cadastro/:tipo', component: PaginaCadastroComponent },
   { path: 'pagina-cadastro/:tipo', component: PaginaCadastroComponent },
   { path: 'meus-dados', component: MeusDadosComponent },
-  { path: 'listar-usuarios/:tipo', component: PaginaUsuariosComponent },
+
+  {
+    path: 'listar-usuarios/:tipo',
+    component: PaginaUsuariosComponent,
+    canActivate: [AdminGuard],
+  },
   {
     path: 'cadastrar-medicamento',
     component: PaginaCadastroMedicamentoComponent,
+    canActivate: [AdminGuard],
   },
   {
     path: 'listar-medicamentos',
     component: PaginaListarMedicamentosComponent,
+    canActivate: [AdminGuard],
   },
 ];
 

@@ -31,4 +31,33 @@ export class RelatoriosService {
       { headers }
     );
   }
+
+  salvarRelatorio(
+    relatorio: RelatorioCompletoDTO
+  ): Observable<RelatorioCompletoDTO> {
+    const token = sessionStorage.getItem('token') || '';
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+
+    // Certifique-se de que relatorio.dados existe
+    const payload = {
+      data: relatorio.data,
+      dados: {
+        peso: Number(relatorio.peso),
+        glicose: Number(relatorio.glicose),
+        colesterolHDL: Number(relatorio.colesterolHDL),
+        colesterolVLDL: Number(relatorio.colesterolVLDL),
+        creatina: Number(relatorio.creatina),
+        trigliceridio: Number(relatorio.trigliceridio),
+      },
+    };
+
+    return this.http.post<RelatorioCompletoDTO>(
+      'http://localhost:8080/sistema-saude/relatorios/salvar',
+      payload,
+      { headers }
+    );
+  }
 }

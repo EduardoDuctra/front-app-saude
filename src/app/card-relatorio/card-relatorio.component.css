@@ -62,3 +62,13 @@
 .acao-relatorio button:hover {
   background-color: #333;
 }
+
+.btn-relatorio input {
+  width: 100%;
+  padding: 5px 8px;
+  margin: 2px 0 8px 0;
+  border-radius: 8px;
+  border: 1px solid #999;
+  font-size: 16px;
+  box-sizing: border-box;
+}
