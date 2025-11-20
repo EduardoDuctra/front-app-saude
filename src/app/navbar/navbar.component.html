@@ -1,103 +1,104 @@
-<mat-toolbar class="navbar">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
+  <!-- Botão Home -->
   <button
     mat-icon-button
-    color="primary"
     (click)="irHome()"
     matTooltip="Página Inicial"
+    class="me-3"
   >
     <mat-icon>home</mat-icon>
   </button>
 
-  <span class="navbar-spacer"></span>
+  <!-- Marca da Navbar -->
+  <a class="navbar-brand fw-bold" style="color: var(--cor-cinza-escuro)">
+    Sistema Saúde
+  </a>
 
-  <!-- Ações do usuário -->
-  <div class="navbar-actions">
-    <!-- Usuário logado -->
-    <ng-container *ngIf="isLoggedIn">
-      <button
-        mat-button
-        [matMenuTriggerFor]="userMenu"
-        class="user-menu-button"
-        matTooltip="Opções do usuário"
-      >
-        <mat-icon>person</mat-icon>
-        <span>{{ currentUser?.perfil?.nome }}</span>
-        <!-- ✨ Nome do usuário -->
-        <mat-icon>arrow_drop_down</mat-icon>
-      </button>
+  <!-- Botão hamburguer (mobile) -->
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarContent"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-      <mat-menu #userMenu="matMenu">
-        <div class="user-menu-header">
-          <h3>{{ currentUser?.perfil?.nome }}</h3>
-          <!-- ✨ Nome do usuário -->
-          <p>{{ userRole }}</p>
-        </div>
-        <mat-divider></mat-divider>
-
-        <!-- Opções para usuário comum -->
-        <ng-container *ngIf="userRole !== 'ROLE_ADMIN'">
-          <button mat-menu-item (click)="meusDados()">
+  <div class="collapse navbar-collapse" id="navbarContent">
+    <ul class="navbar-nav ms-auto align-items-center">
+      <!-- Se estiver logado -->
+      <ng-container *ngIf="isLoggedIn">
+        <li class="nav-item dropdown">
+          <button
+            mat-button
+            [matMenuTriggerFor]="userMenu"
+            class="d-flex align-items-center gap-2 user-menu-button"
+          >
             <mat-icon>person</mat-icon>
-            <span>Meus Dados</span>
+            <span>{{ currentUser?.perfil?.nome }}</span>
+            <mat-icon>arrow_drop_down</mat-icon>
           </button>
+        </li>
 
-          <button mat-menu-item (click)="meusRelatorios()">
-            <mat-icon>analytics</mat-icon>
-            <span>Meus Relatórios</span>
-          </button>
+        <mat-menu #userMenu="matMenu">
+          <div class="user-menu-header">
+            <h3>{{ currentUser?.perfil?.nome }}</h3>
+            <p>{{ userRole }}</p>
+          </div>
+          <mat-divider></mat-divider>
 
-          <button mat-menu-item (click)="logout()">
-            <mat-icon>logout</mat-icon>
-            <span>Sair</span>
-          </button>
-        </ng-container>
+          <!-- Menu comum -->
+          <ng-container *ngIf="userRole !== 'ROLE_ADMIN'">
+            <button mat-menu-item (click)="meusDados()">
+              <mat-icon>person</mat-icon> <span>Meus Dados</span>
+            </button>
 
-        <!-- Opções adicionais para ADM -->
-        <ng-container *ngIf="userRole === 'ROLE_ADMIN'">
-          <button mat-menu-item (click)="meusDados()">
-            <mat-icon>person</mat-icon>
-            <span>Meus Dados</span>
-          </button>
+            <button mat-menu-item (click)="meusRelatorios()">
+              <mat-icon>analytics</mat-icon> <span>Meus Relatórios</span>
+            </button>
 
-          <button mat-menu-item (click)="meusRelatorios()">
-            <mat-icon>analytics</mat-icon>
-            <span>Meus Relatórios</span>
-          </button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>logout</mat-icon> <span>Sair</span>
+            </button>
+          </ng-container>
 
-          <button mat-menu-item (click)="listarUsuarios()">
-            <mat-icon>group</mat-icon>
-            <span>Listar Usuários</span>
-          </button>
+          <!-- Menu admin -->
+          <ng-container *ngIf="userRole === 'ROLE_ADMIN'">
+            <button mat-menu-item (click)="meusDados()">
+              <mat-icon>person</mat-icon> <span>Meus Dados</span>
+            </button>
 
-          <button mat-menu-item (click)="listarFarmacias()">
-            <mat-icon>group</mat-icon>
-            <span>Listar Farmácias</span>
-          </button>
+            <button mat-menu-item (click)="listarUsuarios()">
+              <mat-icon>group</mat-icon> <span>Listar Usuários</span>
+            </button>
+            <button mat-menu-item (click)="listarFarmacias()">
+              <mat-icon>group</mat-icon> <span>Listar Farmácias</span>
+            </button>
+            <button mat-menu-item (click)="cadastrarMedicamento()">
+              <mat-icon>medication</mat-icon> <span>Cadastrar Medicamento</span>
+            </button>
+            <button mat-menu-item (click)="listarMedicamento()">
+              <mat-icon>healing</mat-icon> <span>Listar Medicamento</span>
+            </button>
 
-          <button mat-menu-item (click)="cadastrarMedicamento()">
-            <mat-icon>medication</mat-icon>
-            <span>Cadastrar Medicamento</span>
-          </button>
+            <button mat-menu-item (click)="meusRelatorios()">
+              <mat-icon>analytics</mat-icon>
+              <span>Meus Relatórios</span>
+            </button>
 
-          <button mat-menu-item (click)="listarMedicamento()">
-            <mat-icon>healing</mat-icon>
-            <span>Listar Medicamento</span>
-          </button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>logout</mat-icon> <span>Sair</span>
+            </button>
+          </ng-container>
+        </mat-menu>
+      </ng-container>
 
-          <button mat-menu-item (click)="logout()">
-            <mat-icon>logout</mat-icon>
-            <span>Sair</span>
-          </button>
-        </ng-container>
-      </mat-menu>
-    </ng-container>
-
-    <!-- Usuário não logado -->
-    <ng-container *ngIf="!isLoggedIn">
-      <button mat-raised-button color="primary" (click)="login()">
-        <mat-icon>login</mat-icon>
-        Entrar
-      </button>
-    </ng-container>
+      <!-- Se NÃO estiver logado -->
+      <ng-container *ngIf="!isLoggedIn">
+        <button mat-raised-button color="primary" (click)="login()">
+          <mat-icon>login</mat-icon> Entrar
+        </button>
+      </ng-container>
+    </ul>
   </div>
-</mat-toolbar>
+</nav>

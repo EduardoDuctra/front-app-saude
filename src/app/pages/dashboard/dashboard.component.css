@@ -1,24 +1,30 @@
-.linha-containers {
+/* Faz as colunas terem a mesma altura */
+.row {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+/* Cada coluna vira flex container */
+.col-12,
+.col-lg-4 {
+  display: flex;
+}
+
+/* App-container ocupa a coluna inteira */
+.dashboard-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Botões coluna 2 */
+.botoes-dashboard {
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
-body {
-  color: var(--cor-cinza-escuro);
-}
-
-.botoes-dashboard {
-  display: flex;
-  flex-direction: column; /* mantém em coluna */
-}
-
-.botoes-dashboard app-botao-info {
-  margin-bottom: 20px; /* espaçamento entre os botões */
-}
-
+/* Botões remédios */
 app-botao-remedio {
-  margin-bottom: 20px;
-  display: block; /* garante que a margin funcione corretamente */
+  margin-bottom: 15px;
 }

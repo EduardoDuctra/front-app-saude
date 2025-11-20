@@ -1,74 +1,25 @@
-.btn-relatorio {
-  background-color: var(--cor-cinza-claro);
-  border-radius: 20px;
-  padding: 10px;
+.card-relatorio {
+  border-radius: 16px;
+}
+
+.titulo-relatorio {
   font-size: 20px;
   font-weight: 700;
-  border: none;
-  text-align: left;
-  width: 100%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  box-sizing: border-box;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  color: var(--cor-cinza-escuro);
 }
 
-.btn-relatorio:hover {
-  background-color: var(--cor-cinza-escuro);
+.campo {
+  margin-bottom: 12px;
 }
 
-.btn-relatorio h3 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.btn-relatorio hr {
-  width: 100%;
-  margin: 5px 0;
-  border: 0;
-  border-top: 1px solid #000000;
-}
-
-.btn-relatorio p {
-  margin: 2px 0;
-  font-size: 16px;
-  font-weight: 500;
-  color: #000;
-}
-
-/* Botões de ação */
-.acao-relatorio {
-  margin-top: 5px;
-  display: flex;
-  gap: 10px;
-}
-
-.acao-relatorio button {
-  background-color: var(--cor-cinza-escuro);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 5px 10px;
-  cursor: pointer;
+.campo label {
   font-size: 14px;
-  transition: background-color 0.2s;
+  font-weight: 600;
+  color: var(--cor-cinza-escuro);
 }
 
-.acao-relatorio button:hover {
-  background-color: #333;
-}
-
-.btn-relatorio input {
-  width: 100%;
-  padding: 5px 8px;
-  margin: 2px 0 8px 0;
-  border-radius: 8px;
-  border: 1px solid #999;
+p {
   font-size: 16px;
-  box-sizing: border-box;
+  margin: 4px 0;
 }

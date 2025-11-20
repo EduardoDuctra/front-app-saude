@@ -1,0 +1,15 @@
+.pagina-dados {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--cor-cinza-escuro);
+  margin-bottom: 20px;
+  text-align: center;
+}

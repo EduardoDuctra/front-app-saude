@@ -28,12 +28,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 
 import { PaginaRelatoriosComponent } from './pages/pagina-relatorios/pagina-relatorios.component';
 import { CardRelatorioComponent } from './card-relatorio/card-relatorio.component';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import {
+  MatNativeDateModule,
+  MatOption,
+  MatOptionModule,
+} from '@angular/material/core';
 import { FormularioUsuarioComponent } from './formulario-usuario/formulario-usuario.component';
 import { MeusDadosComponent } from './pages/meus-dados/meus-dados.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -84,7 +90,6 @@ import { CardMedicamentoComponent } from './card-medicamento/card-medicamento.co
     MatInputModule,
     MatIconModule,
     HttpClientModule,
-
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -96,6 +101,12 @@ import { CardMedicamentoComponent } from './card-medicamento/card-medicamento.co
     MatDatepickerModule,
     MatNativeDateModule,
     FormsModule,
+    MatCardModule,
+    MatOption,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

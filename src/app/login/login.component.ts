@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { DadoUsuarioDTO } from '../../DTO/DadoUsuarioDTO';
 
@@ -9,24 +10,77 @@ import { DadoUsuarioDTO } from '../../DTO/DadoUsuarioDTO';
   styleUrls: ['./login.component.css'],
   standalone: false,
 })
-export class LoginComponent {
-  email: string = '';
-  senha: string = '';
+export class LoginComponent implements OnInit {
+  loginForm!: FormGroup;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
-  onSubmit() {
-    if (!this.email || !this.senha) {
+  ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', Validators.required],
+    });
+  }
+
+  // ----------------------------
+  // Getters SEM ternários
+  // ----------------------------
+
+  get emailVazio(): boolean {
+    const campo = this.loginForm.get('email');
+    if (!campo) return false;
+    if (campo.hasError('required') && campo.touched) {
+      return true;
+    }
+    return false;
+  }
+
+  get emailInvalido(): boolean {
+    const campo = this.loginForm.get('email');
+    if (!campo) return false;
+    if (campo.hasError('email') && campo.touched) {
+      return true;
+    }
+    return false;
+  }
+
+  get senhaVazia(): boolean {
+    const campo = this.loginForm.get('senha');
+    if (!campo) return false;
+    if (campo.hasError('required') && campo.touched) {
+      return true;
+    }
+    return false;
+  }
+
+  get formularioInvalido(): boolean {
+    if (this.loginForm.invalid) {
+      return true;
+    }
+    return false;
+  }
+
+  // ----------------------------
+  // Lógica do LOGIN
+  // (a mesma que você tinha antes)
+  // ----------------------------
+
+  onSubmit(): void {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
       alert('Preencha todos os campos!');
       return;
     }
 
-    const loginData = {
-      email: this.email,
-      senha: this.senha,
-    };
+    const email = this.loginForm.value.email;
+    const senha = this.loginForm.value.senha;
 
-    // Login no backend
+    const loginData = { email, senha };
+
     this.http
       .post<any>('http://localhost:8080/sistema-saude/login', loginData, {
         observe: 'response',
@@ -38,41 +92,41 @@ export class LoginComponent {
             return;
           }
 
-          const token = res.body.token;
+          const token = res.body?.token;
+
           if (!token) {
             alert('Token não recebido do backend!');
             return;
           }
 
-          // Salva o token na sessão
           sessionStorage.setItem('token', token);
 
-          // Busca os dados do usuário logado
+          // Buscar perfil do usuário
+          const headers = new HttpHeaders({
+            Authorization: `Bearer ${token}`,
+          });
+
           this.http
             .get<DadoUsuarioDTO>(
               'http://localhost:8080/sistema-saude/usuario/perfil',
-              {
-                headers: { Authorization: `Bearer ${token}` },
-              }
+              { headers }
             )
             .subscribe({
               next: (usuario) => {
                 console.log('Usuário logado:', usuario);
 
-                // Salva usuário completo na sessão
                 sessionStorage.setItem('usuario', JSON.stringify(usuario));
 
-                // Redireciona para o dashboard
+                // redireciona
                 this.router.navigate(['/dashboard']);
               },
-              error: (err) => {
-                console.error('Erro ao buscar usuário logado:', err);
+              error: () => {
                 alert('Erro ao buscar dados do usuário!');
               },
             });
         },
-        error: (err) => {
-          console.error('Erro no login:', err);
+
+        error: () => {
           alert('Email ou senha incorretos!');
         },
       });

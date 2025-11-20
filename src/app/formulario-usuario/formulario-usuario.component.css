@@ -1,70 +1,80 @@
-/* Container principal do formulário */
-.login {
-  border: 2px solid var(--cor-cinza-claro);
-  width: 400px; /* largura fixa maior */
-  max-width: 90%; /* responsivo em telas pequenas */
-  height: auto;
-  border-radius: 40px;
-  box-shadow: var(--cor-cinza-escuro);
-  padding: 30px 20px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* Título */
-h2 {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-/* Grupos de campos do formulário */
-.form-group {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-/* Inputs e selects */
-input,
-.select {
-  width: 100%; /* agora ocupa todo o container */
-  max-width: 400px; /* limite máximo para não estourar */
-  padding: 12px;
-  margin-bottom: 20px;
-  font-size: 16px;
-  border-radius: 10px;
-  border: 1px solid var(--cor-cinza-claro);
-  box-sizing: border-box;
-}
-
-/* Botão de cadastro */
-button {
-  width: 60%; /* maior e proporcional aos inputs */
-  max-width: 250px;
-  padding: 12px;
-  font-size: 16px;
+/* ====== CARD PRINCIPAL ====== */
+.card-cadastro {
   border-radius: 20px;
-  border: none;
-  background-color: #4caf50;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  display: block;
-  margin: 0 auto 20px auto;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  background: #ffffff;
 }
 
-button:hover {
-  background-color: #45a049;
+/* ====== TÍTULO ====== */
+.card-cadastro h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--cor-cinza-escuro);
+  margin-bottom: 20px;
+}
+
+/* ====== MATERIAL FORM FIELDS ====== */
+mat-form-field {
+  width: 100%;
+}
+
+/* Label mais forte */
+.mat-mdc-floating-label {
+  color: var(--cor-cinza-escuro) !important;
+  font-weight: 600 !important;
+}
+
+/* Borda quando selecionada */
+.mdc-notched-outline__leading,
+.mdc-notched-outline__notch,
+.mdc-notched-outline__trailing {
+  border-color: var(--cor-cinza-claro) !important;
+}
+
+.mat-mdc-form-field-focus-overlay {
+  background: rgba(0, 0, 0, 0.03) !important;
+}
+
+/* ====== INPUT ====== */
+.mat-mdc-input-element {
+  font-size: 16px;
+}
+
+/* ====== ERROS ====== */
+mat-error {
+  font-size: 14px;
+  margin-top: 4px;
+  font-weight: 500;
+  color: #d32f2f !important;
+}
+
+/* ====== BOTÃO PRINCIPAL ====== */
+button[mat-raised-button] {
+  height: 48px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 12px;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  .card-cadastro {
+    padding: 20px 15px;
+  }
+
+  .card-cadastro h2 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-cadastro {
+    padding: 15px 10px;
+  }
+
+  button[mat-raised-button] {
+    font-size: 16px;
+    height: 44px;
+  }
 }

@@ -15,6 +15,7 @@
   flex-direction: column; /* empilha nome, linha e infos */
   align-items: flex-start; /* alinha à esquerda */
   box-sizing: border-box; /* padding incluso na largura */
+  margin-top: 10px;
 }
 
 .btn-remedio:hover {

@@ -2,6 +2,7 @@ import { BancoMedicamentoService } from './../service/bancoMedicamento.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MedicamentoService } from '../service/medicamento.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-input-cadastro-medicamento',
@@ -15,7 +16,8 @@ export class InputCadastroMedicamentoComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private bancoMedicamentoService: BancoMedicamentoService
+    private bancoMedicamentoService: BancoMedicamentoService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +36,7 @@ export class InputCadastroMedicamentoComponent implements OnInit {
             console.log('Medicamento cadastrado:', res);
             // Limpa o formulário
             this.medicamentoForm.reset();
+            this.router.navigate(['/dashboard']);
           },
           error: (err) => console.error('Erro ao cadastrar:', err),
         });

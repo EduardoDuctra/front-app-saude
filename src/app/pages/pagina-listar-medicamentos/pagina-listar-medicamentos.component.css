@@ -1,11 +1,43 @@
+/* Container principal */
 .pagina-lista-medicamentos {
-  padding: 20px;
   max-width: 800px;
   margin: 0 auto;
 }
 
+/* Card do título */
+.titulo-card {
+  padding: 15px 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* Lista */
 .lista-medicamentos {
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+
+/* Cada card */
+.card-item {
+  padding: 15px 20px !important;
+  border-radius: 14px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Linha do nome + botão */
+.linha-med {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Nome do medicamento */
+.nome-med {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--cor-cinza-escuro);
 }

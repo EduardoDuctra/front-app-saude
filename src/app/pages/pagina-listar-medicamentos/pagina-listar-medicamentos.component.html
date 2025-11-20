@@ -1,15 +1,24 @@
 <app-navbar></app-navbar>
 
-<div class="pagina-lista-medicamentos">
-  <h2>Lista de Medicamentos</h2>
+<div class="container mt-4 pagina-lista-medicamentos">
+  <mat-card class="titulo-card mb-4">
+    <h2 class="m-0">Lista de Medicamentos</h2>
+  </mat-card>
 
   <div class="lista-medicamentos">
-    <div *ngFor="let med of listaMedicamentos">
-      <app-card-medicamento
-        [medicamento]="med"
-        (excluir)="removerMedicamento($event)"
-      >
-      </app-card-medicamento>
-    </div>
+    <mat-card class="card-item" *ngFor="let med of listaMedicamentos">
+      <div class="linha-med">
+        <span class="nome-med">{{ med.nome }}</span>
+
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="removerMedicamento(med)"
+          matTooltip="Excluir medicamento"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-card>
   </div>
 </div>

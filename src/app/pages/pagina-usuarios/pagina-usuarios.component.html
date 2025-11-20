@@ -1,5 +1,16 @@
 <app-navbar></app-navbar>
 
-<div *ngFor="let usuario of listaUsuarios">
-  <app-card-usuario [item]="usuario"></app-card-usuario>
+<div class="container mt-4">
+  <h2 class="text-center titulo-pagina">
+    {{ tipo === "farmacia" ? "Lista de Farmácias" : "Lista de Usuários" }}
+  </h2>
+
+  <div class="row mt-4">
+    <div
+      class="col-12 col-md-6 col-lg-4 mb-4"
+      *ngFor="let usuario of listaUsuarios"
+    >
+      <app-card-usuario [item]="usuario"></app-card-usuario>
+    </div>
+  </div>
 </div>
