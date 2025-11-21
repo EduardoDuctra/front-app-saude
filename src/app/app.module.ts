@@ -17,7 +17,7 @@ import { InputFormComponent } from './input-form/input-form.component';
 import { LoginComponent } from './login/login.component';
 import { ModalComponent } from './modal/modal.component';
 import { GraficoComponent } from './grafico/grafico.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { BotaoRemedioComponent } from './botao-remedio/botao-remedio.component';
 import { ModalMedicamentoComponent } from './modal-medicamento/modal-medicamento.component';
@@ -51,6 +51,14 @@ import { InputCadastroMedicamentoComponent } from './input-cadastro-medicamento/
 import { PaginaListarMedicamentosComponent } from './pages/pagina-listar-medicamentos/pagina-listar-medicamentos.component';
 import { CardMedicamentoComponent } from './card-medicamento/card-medicamento.component';
 
+import { CardRecolhimentoComponent } from './card-recolhimento/card-recolhimento.component';
+import { DashboardFarmaciaComponent } from './pages/dashboard-farmacia/dashboard-farmacia.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { CardRecolhimentoAceitoComponent } from './card-recolhimento-aceito/card-recolhimento-aceito.component';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,6 +87,9 @@ import { CardMedicamentoComponent } from './card-medicamento/card-medicamento.co
     InputCadastroMedicamentoComponent,
     PaginaListarMedicamentosComponent,
     CardMedicamentoComponent,
+    DashboardFarmaciaComponent,
+    CardRecolhimentoComponent,
+    CardRecolhimentoAceitoComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,7 +119,13 @@ import { CardMedicamentoComponent } from './card-medicamento/card-medicamento.co
     MatSelectModule,
     MatOptionModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

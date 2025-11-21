@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RelatorioCompletoDTO } from '../../../DTO/RelatorioCompletoDTO';
-import { RelatoriosService } from '../../service/relatorio.service';
+
 import { AuthService } from '../../service/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DadoDTO, DadosService } from '../../service/dados.service';
+import { RelatoriosService } from '../../service/relatorio.service';
 
 @Component({
   selector: 'app-pagina-relatorios',

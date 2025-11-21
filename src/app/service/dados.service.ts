@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
-// DTO para dados do usuário
 export interface DadoDTO {
   codDado: number;
   peso: number;
@@ -17,41 +17,23 @@ export interface DadoDTO {
   providedIn: 'root',
 })
 export class DadosService {
-  private baseUrl = 'http://localhost:8080/sistema-saude/dados';
+  private baseUrl = `${environment.apiUrl}/dados`;
 
   constructor(private http: HttpClient) {}
 
-  // Listar todos os dados do usuário logado
   listarDadosUsuario(): Observable<DadoDTO[]> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.get<DadoDTO[]>(`${this.baseUrl}/buscar-por-usuario`, {
-      headers,
-    });
+    return this.http.get<DadoDTO[]>(`${this.baseUrl}/buscar-por-usuario`);
   }
 
-  // Salvar um novo dado
   salvarDado(dado: Partial<DadoDTO>): Observable<DadoDTO> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.post<DadoDTO>(`${this.baseUrl}/salvar`, dado, { headers });
+    return this.http.post<DadoDTO>(`${this.baseUrl}/salvar`, dado);
   }
 
-  // Atualizar dado existente
   atualizarDado(dado: DadoDTO): Observable<DadoDTO> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.put<DadoDTO>(`${this.baseUrl}/atualizar`, dado, {
-      headers,
-    });
+    return this.http.put<DadoDTO>(`${this.baseUrl}/atualizar`, dado);
   }
 
-  // Excluir dado pelo código
   excluirDado(codDado: number): Observable<void> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.delete<void>(`${this.baseUrl}/deletar/${codDado}`, {
-      headers,
-    });
+    return this.http.delete<void>(`${this.baseUrl}/deletar/${codDado}`);
   }
 }

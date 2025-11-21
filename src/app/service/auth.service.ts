@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DadoUsuarioDTO } from '../../DTO/DadoUsuarioDTO';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080/sistema-saude/usuario';
+  private apiUrl = environment.apiUrl;
+  private usuarioUrl = `${this.apiUrl}/usuario`;
 
-  // BehaviorSubject para armazenar o usuário logado
   private usuarioLogadoSubject = new BehaviorSubject<DadoUsuarioDTO | null>(
     null
   );
@@ -18,41 +19,69 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  // -------------------------------------------
+  // 🔐 TOKEN
+  // -------------------------------------------
+  getToken(): string {
+    return localStorage.getItem('token') || '';
+  }
+
+  // -------------------------------------------
+  // 🔑 LOGIN
+  // -------------------------------------------
   login(email: string, senha: string): Observable<void> {
     return this.http
-      .post<{ token: string }>(`${this.baseUrl}/login`, { email, senha })
+      .post<{ token: string }>(`${this.apiUrl}/login`, { email, senha })
       .pipe(
         map((response) => {
-          sessionStorage.setItem('token', response.token);
-          this.carregarUsuarioLogado().subscribe(); // atualiza o BehaviorSubject
+          localStorage.setItem('token', response.token);
         })
       );
   }
 
+  // -------------------------------------------
+  // 👤 CARREGA PERFIL DO USUÁRIO LOGADO
+  // (token já vai no interceptor)
+  // -------------------------------------------
+  carregarUsuarioLogado(): Observable<DadoUsuarioDTO> {
+    return this.http.get<DadoUsuarioDTO>(`${this.usuarioUrl}/perfil`).pipe(
+      map((usuario) => {
+        this.usuarioLogadoSubject.next(usuario);
+        return usuario;
+      })
+    );
+  }
+
+  // -------------------------------------------
+  // 🚪 LOGOUT
+  // -------------------------------------------
   logout() {
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('token');
     this.usuarioLogadoSubject.next(null);
   }
 
-  carregarUsuarioLogado(): Observable<DadoUsuarioDTO> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http
-      .get<DadoUsuarioDTO>(`${this.baseUrl}/perfil`, { headers })
-      .pipe(
-        map((usuario) => {
-          console.log('Usuário logado:', usuario);
-          this.usuarioLogadoSubject.next(usuario);
-          return usuario;
-        })
-      );
-  }
-
+  // -------------------------------------------
+  // GET USER
+  // -------------------------------------------
   getUsuarioLogado(): DadoUsuarioDTO | null {
     return this.usuarioLogadoSubject.value;
   }
 
+  // -------------------------------------------
+  // VERIFICA LOGIN
+  // -------------------------------------------
   estaLogado(): boolean {
-    return !!sessionStorage.getItem('token');
+    return !!this.getToken();
+  }
+
+  // -------------------------------------------
+  // VERIFICA ROLES
+  // -------------------------------------------
+  isAdmin(): boolean {
+    return this.getUsuarioLogado()?.conta?.permissao === 'ROLE_ADMIN';
+  }
+
+  isFarmacia(): boolean {
+    return this.getUsuarioLogado()?.conta?.permissao === 'ROLE_FARMACIA';
   }
 }

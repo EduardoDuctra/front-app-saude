@@ -11,29 +11,59 @@ import { PaginaCadastroMedicamentoComponent } from './pages/pagina-cadastro-medi
 import { PaginaListarMedicamentosComponent } from './pages/pagina-listar-medicamentos/pagina-listar-medicamentos.component';
 import { AdminGuard } from './guards/admGuard';
 
+import { FarmaciaGuard } from './guards/farmaciaGuard';
+import { DashboardFarmaciaComponent } from './pages/dashboard-farmacia/dashboard-farmacia.component';
+import { AuthGuard } from './guards/auth.guard';
+
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // rota inicial
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'pagina-relatorios', component: PaginaRelatoriosComponent },
-  { path: 'pagina-cadastro/:tipo', component: PaginaCadastroComponent },
-  { path: 'pagina-cadastro/:tipo', component: PaginaCadastroComponent },
-  { path: 'meus-dados', component: MeusDadosComponent },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'pagina-relatorios',
+    component: PaginaRelatoriosComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'pagina-cadastro/:tipo',
+    component: PaginaCadastroComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'pagina-cadastro/:tipo',
+    component: PaginaCadastroComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'meus-dados',
+    component: MeusDadosComponent,
+    canActivate: [AuthGuard],
+  },
 
   {
     path: 'listar-usuarios/:tipo',
     component: PaginaUsuariosComponent,
-    canActivate: [AdminGuard],
+    canActivate: [AdminGuard, AuthGuard],
   },
   {
     path: 'cadastrar-medicamento',
     component: PaginaCadastroMedicamentoComponent,
-    canActivate: [AdminGuard],
+    canActivate: [AdminGuard, AuthGuard],
   },
   {
     path: 'listar-medicamentos',
     component: PaginaListarMedicamentosComponent,
-    canActivate: [AdminGuard],
+    canActivate: [AdminGuard, AuthGuard],
+  },
+
+  {
+    path: 'dashboard-farmacia',
+    component: DashboardFarmaciaComponent,
+    canActivate: [FarmaciaGuard, AuthGuard],
   },
 ];
 

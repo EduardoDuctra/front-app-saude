@@ -4,10 +4,11 @@ import { MedicamentoService } from '../../service/medicamento.service';
 import { MedicamentoDTO } from '../../../DTO/MedicamentoDTO';
 import { DadosService } from '../../service/dados.service';
 import { DadosDTO } from '../../../DTO/DadosDTO';
-import { RelatoriosService } from '../../service/relatorio.service';
+
 import { RelatoriosDTO } from '../../../DTO/RelatoriosDTO';
 import { UsuarioService } from '../../service/usuario.service';
 import { IMCDTO } from '../../../DTO/IMCDTO';
+import { RelatoriosService } from '../../service/relatorio.service';
 
 @Component({
   selector: 'app-dashboard',

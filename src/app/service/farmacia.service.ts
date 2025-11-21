@@ -1,51 +1,42 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DadoFarmaciaDTO } from '../../DTO/DadoFarmaciaDTO';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FarmaciaService {
-  private baseUrl = 'http://localhost:8080/sistema-saude/farmacia';
+  private baseUrl = `${environment.apiUrl}/farmacia`;
 
   constructor(private http: HttpClient) {}
 
+  // -----------------------------
+  // ✔ SALVAR FARMÁCIA (público)
+  // -----------------------------
   salvarFarmacia(farmacia: any): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(`${this.baseUrl}/salvar`, farmacia, { headers });
+    return this.http.post<any>(`${this.baseUrl}/salvar`, farmacia);
   }
 
+  // -----------------------------
+  // ✔ ATUALIZAR FARMÁCIA (autenticado)
+  // -----------------------------
   atualizarFarmacia(farmacia: any): Observable<any> {
-    const token = sessionStorage.getItem('token') || '';
-
-    console.log('Token:', token);
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    });
-    return this.http.put<any>(`${this.baseUrl}/atualizar-farmacia`, farmacia, {
-      headers,
-    });
+    return this.http.put<any>(`${this.baseUrl}/atualizar-farmacia`, farmacia);
   }
 
+  // -----------------------------
+  // ✔ PERFIL FARMÁCIA LOGADA
+  // -----------------------------
   carregarFarmaciaLogada(): Observable<DadoFarmaciaDTO> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.get<DadoFarmaciaDTO>(`${this.baseUrl}/perfil`, {
-      headers,
-    });
+    return this.http.get<DadoFarmaciaDTO>(`${this.baseUrl}/perfil`);
   }
 
+  // -----------------------------
+  // ✔ LISTAR FARMÁCIAS (ADMIN)
+  // -----------------------------
   listarFarmacias(): Observable<DadoFarmaciaDTO[]> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.get<DadoFarmaciaDTO[]>(
-      `${this.baseUrl}/listar-farmacias`,
-      {
-        headers,
-      }
-    );
+    return this.http.get<DadoFarmaciaDTO[]>(`${this.baseUrl}/listar-farmacias`);
   }
 }

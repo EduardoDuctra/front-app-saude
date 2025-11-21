@@ -1,43 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BancoMedicamentoDTO } from '../../DTO/BancoMedicamentoDTO';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BancoMedicamentoService {
-  private baseUrl = 'http://localhost:8080/sistema-saude/banco-medicamentos';
+  private baseUrl = `${environment.apiUrl}/banco-medicamentos`;
 
   constructor(private http: HttpClient) {}
 
   cadastrarMedicamento(med: { nome: string }): Observable<BancoMedicamentoDTO> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    });
-    return this.http.post<BancoMedicamentoDTO>(`${this.baseUrl}/salvar`, med, {
-      headers,
-    });
+    return this.http.post<BancoMedicamentoDTO>(`${this.baseUrl}/salvar`, med);
   }
 
-  // Listar todos os medicamentos do usuário
   listarMedicamentos(): Observable<BancoMedicamentoDTO[]> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-    return this.http.get<BancoMedicamentoDTO[]>(
-      `${this.baseUrl}/listar-todos`,
-      { headers }
-    );
+    return this.http.get<BancoMedicamentoDTO[]>(`${this.baseUrl}/listar-todos`);
   }
 
-  // Deletar medicamento pelo id
   deletarMedicamento(id: number): Observable<void> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.delete<void>(`${this.baseUrl}/deletar/${id}`, { headers });
+    return this.http.delete<void>(`${this.baseUrl}/deletar/${id}`);
   }
 }

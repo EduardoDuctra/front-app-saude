@@ -12,7 +12,7 @@ import { MedicamentoService } from '../service/medicamento.service';
 import { BancoMedicamentoService } from '../service/bancoMedicamento.service';
 import { BancoMedicamentoDTO } from '../../DTO/BancoMedicamentoDTO';
 import { RecolhimentoDTO } from '../../DTO/RecolhimentoDTO';
-import { RecolhimentoService } from '../service/RecolhimentoService';
+import { RecolhimentoService } from '../service/recolhimento.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { DadoUsuarioDTO } from '../../DTO/DadoUsuarioDTO';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -72,63 +74,30 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
-      alert('Preencha todos os campos!');
       return;
     }
 
-    const email = this.loginForm.value.email;
-    const senha = this.loginForm.value.senha;
+    const { email, senha } = this.loginForm.value;
 
-    const loginData = { email, senha };
+    this.authService.login(email, senha).subscribe({
+      next: () => {
+        this.authService.carregarUsuarioLogado().subscribe({
+          next: (usuario) => {
+            sessionStorage.setItem('usuario', JSON.stringify(usuario));
 
-    this.http
-      .post<any>('http://localhost:8080/sistema-saude/login', loginData, {
-        observe: 'response',
-      })
-      .subscribe({
-        next: (res) => {
-          if (res.status !== 200) {
-            alert('Email ou senha incorretos!');
-            return;
-          }
+            const role = usuario.conta.permissao;
 
-          const token = res.body?.token;
-
-          if (!token) {
-            alert('Token não recebido do backend!');
-            return;
-          }
-
-          sessionStorage.setItem('token', token);
-
-          // Buscar perfil do usuário
-          const headers = new HttpHeaders({
-            Authorization: `Bearer ${token}`,
-          });
-
-          this.http
-            .get<DadoUsuarioDTO>(
-              'http://localhost:8080/sistema-saude/usuario/perfil',
-              { headers }
-            )
-            .subscribe({
-              next: (usuario) => {
-                console.log('Usuário logado:', usuario);
-
-                sessionStorage.setItem('usuario', JSON.stringify(usuario));
-
-                // redireciona
-                this.router.navigate(['/dashboard']);
-              },
-              error: () => {
-                alert('Erro ao buscar dados do usuário!');
-              },
-            });
-        },
-
-        error: () => {
-          alert('Email ou senha incorretos!');
-        },
-      });
+            // 🔥 redirecionamento por role
+            if (role === 'ROLE_FARMACIA') {
+              this.router.navigate(['/dashboard-farmacia']);
+            } else {
+              this.router.navigate(['/dashboard']);
+            }
+          },
+          error: () => alert('Erro ao carregar perfil do usuário.'),
+        });
+      },
+      error: () => alert('Email ou senha incorretos!'),
+    });
   }
 }

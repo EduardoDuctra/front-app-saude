@@ -1,52 +1,50 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IMCDTO } from '../../DTO/IMCDTO';
 import { DadoUsuarioDTO } from '../../DTO/DadoUsuarioDTO';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsuarioService {
-  private baseUrl = 'http://localhost:8080/sistema-saude/usuario';
+  private baseUrl = `${environment.apiUrl}/usuario`;
 
   constructor(private http: HttpClient) {}
 
+  // -------------------------------------------
+  // ✔ Calcular IMC
+  // -------------------------------------------
   calcularIMC(): Observable<IMCDTO> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.get<IMCDTO>(`${this.baseUrl}/imc`, { headers });
+    return this.http.get<IMCDTO>(`${this.baseUrl}/imc`);
   }
 
+  // -------------------------------------------
+  // ✔ Salvar usuário (público)
+  // -------------------------------------------
   salvarUsuario(usuario: any): Observable<DadoUsuarioDTO> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<DadoUsuarioDTO>(`${this.baseUrl}/salvar`, usuario, {
-      headers,
-    });
+    return this.http.post<DadoUsuarioDTO>(`${this.baseUrl}/salvar`, usuario);
   }
 
+  // -------------------------------------------
+  // ✔ Carregar perfil do usuário logado
+  // -------------------------------------------
   carregarUsuarioLogado(): Observable<DadoUsuarioDTO> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.get<DadoUsuarioDTO>(`${this.baseUrl}/perfil`, { headers });
+    return this.http.get<DadoUsuarioDTO>(`${this.baseUrl}/perfil`);
   }
 
+  // -------------------------------------------
+  // ✔ Atualizar usuário
+  // -------------------------------------------
   atualizarUsuario(usuario: DadoUsuarioDTO): Observable<DadoUsuarioDTO> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    });
-    return this.http.put<DadoUsuarioDTO>(`${this.baseUrl}/atualizar`, usuario, {
-      headers,
-    });
+    return this.http.put<DadoUsuarioDTO>(`${this.baseUrl}/atualizar`, usuario);
   }
 
+  // -------------------------------------------
+  // ✔ Listar usuários (ADMIN)
+  // -------------------------------------------
   listarUsuarios(): Observable<DadoUsuarioDTO[]> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.get<DadoUsuarioDTO[]>(`${this.baseUrl}/listar-usuarios`, {
-      headers,
-    });
+    return this.http.get<DadoUsuarioDTO[]>(`${this.baseUrl}/listar-usuarios`);
   }
 }

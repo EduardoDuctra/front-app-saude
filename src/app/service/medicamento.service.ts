@@ -1,56 +1,34 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MedicamentoDTO } from '../../DTO/MedicamentoDTO';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MedicamentoService {
-  private baseUrl = 'http://localhost:8080/sistema-saude/medicamentos';
+  private baseUrl = `${environment.apiUrl}/medicamentos`;
 
   constructor(private http: HttpClient) {}
 
   listarMedicamentosUsuario(): Observable<MedicamentoDTO[]> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
     return this.http.get<MedicamentoDTO[]>(
-      `${this.baseUrl}/buscar-por-usuario`,
-      { headers }
+      `${this.baseUrl}/buscar-por-usuario`
     );
   }
 
   atualizarMedicamento(
     med: MedicamentoDTO & { codMedicamento: number }
   ): Observable<MedicamentoDTO> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-    return this.http.put<MedicamentoDTO>(`${this.baseUrl}/atualizar`, med, {
-      headers,
-    });
+    return this.http.put<MedicamentoDTO>(`${this.baseUrl}/atualizar`, med);
   }
 
   excluirMedicamento(codMedicamento: number): Observable<void> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-    return this.http.delete<void>(`${this.baseUrl}/deletar/${codMedicamento}`, {
-      headers,
-    });
+    return this.http.delete<void>(`${this.baseUrl}/deletar/${codMedicamento}`);
   }
 
   adicionarMedicamento(med: MedicamentoDTO): Observable<MedicamentoDTO> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-    return this.http.post<MedicamentoDTO>(`${this.baseUrl}/salvar`, med, {
-      headers,
-    });
+    return this.http.post<MedicamentoDTO>(`${this.baseUrl}/salvar`, med);
   }
 }
