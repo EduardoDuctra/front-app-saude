@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { RecolhimentoFarmaciaDTO } from '../../DTO/RecolhimentoFarmaciaDTO';
+import { RecolhimentoFarmaciaDTO } from '../../../DTO/RecolhimentoFarmaciaDTO';
 
 @Component({
   selector: 'app-card-recolhimento-aceito',

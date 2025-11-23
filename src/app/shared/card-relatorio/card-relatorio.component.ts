@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { RelatorioCompletoDTO } from '../../DTO/RelatorioCompletoDTO';
+import { RelatorioCompletoDTO } from '../../../DTO/RelatorioCompletoDTO';
 
 @Component({
   selector: 'app-card-relatorio',

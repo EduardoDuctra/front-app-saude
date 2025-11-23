@@ -1,7 +1,7 @@
-import { BancoMedicamentoService } from './../service/bancoMedicamento.service';
+import { BancoMedicamentoService } from '../../service/bancoMedicamento.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MedicamentoService } from '../service/medicamento.service';
+import { MedicamentoService } from '../../service/medicamento.service';
 import { Router } from '@angular/router';
 
 @Component({

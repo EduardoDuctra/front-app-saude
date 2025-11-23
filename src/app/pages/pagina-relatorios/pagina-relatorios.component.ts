@@ -1,9 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RelatorioCompletoDTO } from '../../../DTO/RelatorioCompletoDTO';
-
-import { AuthService } from '../../service/auth.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { DadoDTO, DadosService } from '../../service/dados.service';
 import { RelatoriosService } from '../../service/relatorio.service';
 
 @Component({

@@ -1,69 +1,89 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { PaginaRelatoriosComponent } from './pages/pagina-relatorios/pagina-relatorios.component';
-import { MeusDadosComponent } from './pages/meus-dados/meus-dados.component';
-import { PaginaCadastroComponent } from './pagina-cadastro/pagina-cadastro.component';
-import { PaginaUsuariosComponent } from './pages/pagina-usuarios/pagina-usuarios.component';
-import { PaginaCadastroMedicamentoComponent } from './pages/pagina-cadastro-medicamento/pagina-cadastro-medicamento.component';
-import { PaginaListarMedicamentosComponent } from './pages/pagina-listar-medicamentos/pagina-listar-medicamentos.component';
-import { AdminGuard } from './guards/admGuard';
 
+import { AdminGuard } from './guards/admGuard';
 import { FarmaciaGuard } from './guards/farmaciaGuard';
-import { DashboardFarmaciaComponent } from './pages/dashboard-farmacia/dashboard-farmacia.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' }, // rota inicial
-  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginModule),
+  },
+
   {
     path: 'dashboard',
-    component: DashboardComponent,
     canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./pages/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
   },
+
   {
     path: 'pagina-relatorios',
-    component: PaginaRelatoriosComponent,
     canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./pages/pagina-relatorios/pagina-relatorios.module').then(
+        (m) => m.PaginaRelatoriosModule
+      ),
   },
-  {
-    path: 'pagina-cadastro/:tipo',
-    component: PaginaCadastroComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'pagina-cadastro/:tipo',
-    component: PaginaCadastroComponent,
-    canActivate: [AuthGuard],
-  },
+
   {
     path: 'meus-dados',
-    component: MeusDadosComponent,
     canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./pages/meus-dados/meus-dados.module').then(
+        (m) => m.MeusDadosModule
+      ),
+  },
+
+  {
+    path: 'pagina-cadastro/:tipo',
+    canActivate: [],
+    loadChildren: () =>
+      import('./pages/pagina-cadastro/pagina-cadastro.module').then(
+        (m) => m.PaginaCadastroModule
+      ),
   },
 
   {
     path: 'listar-usuarios/:tipo',
-    component: PaginaUsuariosComponent,
-    canActivate: [AdminGuard, AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
+    loadChildren: () =>
+      import('./pages/pagina-usuarios/pagina-usuarios.module').then(
+        (m) => m.PaginaUsuariosModule
+      ),
   },
+
   {
     path: 'cadastrar-medicamento',
-    component: PaginaCadastroMedicamentoComponent,
-    canActivate: [AdminGuard, AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
+    loadChildren: () =>
+      import(
+        './pages/pagina-cadastro-medicamento/pagina-cadastro-medicamento.module'
+      ).then((m) => m.PaginaCadastroMedicamentoModule),
   },
+
   {
     path: 'listar-medicamentos',
-    component: PaginaListarMedicamentosComponent,
-    canActivate: [AdminGuard, AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
+    loadChildren: () =>
+      import(
+        './pages/pagina-listar-medicamentos/pagina-listar-medicamentos.module'
+      ).then((m) => m.PaginaListarMedicamentosModule),
   },
 
   {
     path: 'dashboard-farmacia',
-    component: DashboardFarmaciaComponent,
-    canActivate: [FarmaciaGuard, AuthGuard],
+    canActivate: [AuthGuard, FarmaciaGuard],
+    loadChildren: () =>
+      import('./pages/dashboard-farmacia/dashboard-farmacia.module').then(
+        (m) => m.DashboardFarmaciaModule
+      ),
   },
 ];
 

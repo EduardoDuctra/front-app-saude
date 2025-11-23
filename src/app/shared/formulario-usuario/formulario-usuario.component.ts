@@ -6,11 +6,11 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UsuarioService } from '../service/usuario.service';
+import { UsuarioService } from '../../service/usuario.service';
 import { Router } from '@angular/router';
-import { FarmaciaService } from '../service/farmacia.service';
-import { DadoUsuarioDTO } from '../../DTO/DadoUsuarioDTO';
-import { DadoFarmaciaDTO } from '../../DTO/DadoFarmaciaDTO';
+import { FarmaciaService } from '../../service/farmacia.service';
+import { DadoUsuarioDTO } from '../../../DTO/DadoUsuarioDTO';
+import { DadoFarmaciaDTO } from '../../../DTO/DadoFarmaciaDTO';
 
 @Component({
   selector: 'app-formulario-usuario',

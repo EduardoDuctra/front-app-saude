@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { DadoUsuarioDTO } from '../../DTO/DadoUsuarioDTO';
-import { DadoFarmaciaDTO } from '../../DTO/DadoFarmaciaDTO';
+import { DadoUsuarioDTO } from '../../../DTO/DadoUsuarioDTO';
+import { DadoFarmaciaDTO } from '../../../DTO/DadoFarmaciaDTO';
 
 @Component({
   selector: 'app-card-usuario',

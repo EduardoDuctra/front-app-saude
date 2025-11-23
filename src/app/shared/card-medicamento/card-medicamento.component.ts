@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { BancoMedicamentoDTO } from '../../DTO/BancoMedicamentoDTO';
+import { BancoMedicamentoDTO } from '../../../DTO/BancoMedicamentoDTO';
 
 @Component({
   selector: 'app-card-medicamento',

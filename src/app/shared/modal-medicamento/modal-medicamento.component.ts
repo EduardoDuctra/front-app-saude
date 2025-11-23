@@ -7,13 +7,15 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { MedicamentoDTO } from '../../DTO/MedicamentoDTO';
-import { MedicamentoService } from '../service/medicamento.service';
-import { BancoMedicamentoService } from '../service/bancoMedicamento.service';
-import { BancoMedicamentoDTO } from '../../DTO/BancoMedicamentoDTO';
-import { RecolhimentoDTO } from '../../DTO/RecolhimentoDTO';
-import { RecolhimentoService } from '../service/recolhimento.service';
+
+import { MedicamentoService } from '../../service/medicamento.service';
+import { BancoMedicamentoService } from '../../service/bancoMedicamento.service';
+
+import { RecolhimentoService } from '../../service/recolhimento.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MedicamentoDTO } from '../../../DTO/MedicamentoDTO';
+import { BancoMedicamentoDTO } from '../../../DTO/BancoMedicamentoDTO';
+import { RecolhimentoDTO } from '../../../DTO/RecolhimentoDTO';
 
 @Component({
   selector: 'app-modal-medicamento',

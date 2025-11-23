@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { UsuarioService } from '../../service/usuario.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FarmaciaService } from '../../service/farmacia.service';
-import { AuthService } from '../../service/auth.service';
 import { DadoUsuarioDTO } from '../../../DTO/DadoUsuarioDTO';
 import { DadoFarmaciaDTO } from '../../../DTO/DadoFarmaciaDTO';
 
