@@ -1,0 +1,28 @@
+<div class="row justify-content-center mt-4">
+  <div class="col-12 col-md-8 col-lg-5">
+    <mat-card class="p-4 card-medicamento">
+      <h2 class="text-center mb-3">Cadastro de Medicamento</h2>
+
+      <form [formGroup]="medicamentoForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Nome do Medicamento</mat-label>
+          <input matInput type="text" formControlName="nome" />
+
+          <mat-error *ngIf="medicamentoForm.get('nome')?.hasError('required')">
+            O nome do medicamento é obrigatório.
+          </mat-error>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          class="w-100 mt-2"
+          type="submit"
+          [disabled]="medicamentoForm.invalid"
+        >
+          Cadastrar
+        </button>
+      </form>
+    </mat-card>
+  </div>
+</div>

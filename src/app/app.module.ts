@@ -6,14 +6,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// Componentes que NÃO vão para lazy loading (geralmente login)
-import { LoginComponent } from './login/login.component';
-
-// Shared module
-import { SharedModule } from './shared/shared.module';
-
-// Interceptor
-import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { SharedModule } from './modules/shared/shared.module';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +17,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     HttpClientModule,
     AppRoutingModule,
 
-    SharedModule, // importa tudo que é reutilizável
+    SharedModule,
   ],
   providers: [
     {

@@ -1,0 +1,46 @@
+<div class="login-wrapper">
+  <mat-card class="login-card p-4 shadow">
+    <h2 class="text-center mb-3">Login</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <mat-form-field appearance="outline" class="campo-form">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          type="email"
+          placeholder="Digite seu email"
+        />
+        <mat-error *ngIf="emailVazio">O email é obrigatório.</mat-error>
+        <mat-error *ngIf="emailInvalido">Digite um email válido.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="campo-form">
+        <mat-label>Senha</mat-label>
+        <input
+          matInput
+          formControlName="senha"
+          type="password"
+          placeholder="Digite sua senha"
+        />
+        <mat-error *ngIf="senhaVazia">A senha é obrigatória.</mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="btn-entrar"
+        type="submit"
+        [disabled]="formularioInvalido"
+      >
+        Entrar
+      </button>
+    </form>
+
+    <div class="links-cadastro">
+      <a [routerLink]="['/pagina-cadastro', 'usuario']">Cadastrar Usuário</a>
+      <span class="mx-2">|</span>
+      <a [routerLink]="['/pagina-cadastro', 'farmacia']">Cadastrar Farmácia</a>
+    </div>
+  </mat-card>
+</div>

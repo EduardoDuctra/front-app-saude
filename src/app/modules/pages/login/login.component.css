@@ -1,0 +1,48 @@
+/* Wrapper centralizado */
+.login-wrapper {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 20px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.campo-form {
+  width: 85%;
+  margin-bottom: 18px;
+}
+
+.btn-entrar {
+  width: 60%;
+  align-self: center;
+  margin-top: 10px;
+}
+
+.links-cadastro {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.links-cadastro a {
+  color: var(--cor-cinza-escuro);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.links-cadastro a:hover {
+  text-decoration: underline;
+}

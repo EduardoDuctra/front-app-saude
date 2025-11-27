@@ -1,0 +1,26 @@
+/* Faz as colunas terem a mesma altura */
+.row {
+  display: flex;
+  align-items: stretch;
+}
+
+.col-12,
+.col-lg-4 {
+  display: flex;
+}
+
+.dashboard-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.botoes-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+app-botao-remedio {
+  margin-bottom: 15px;
+}
