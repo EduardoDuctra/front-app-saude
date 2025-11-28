@@ -24,21 +24,34 @@ export class DashboardFarmaciaComponent implements OnInit {
   }
 
   carregarDados(): void {
+    //abertas
     this.recolhimentoService.listarSolicitacoesAbertas().subscribe({
-      next: (lista) => {
-        this.solicitacoesAbertas = lista;
+      next: (solicitacoes) => {
+        //pendentes e concluidos da farmacia logada e coloca em duas listas pelo status
+        this.recolhimentoService.listarRecolhimentosFarmacia().subscribe({
+          next: (listaFarmacia) => {
+            this.pendentes = listaFarmacia.filter(
+              (r) => r.status === 'PENDENTE'
+            );
+            this.concluidos = listaFarmacia.filter(
+              (r) => r.status === 'CONCLUIDO'
+            );
+
+            //verificação para nao ter duplicação. Garante que um recolhimento concluido nao vai estar na aba pendente (filtro no front)
+            const idsFarmacia = listaFarmacia.map((r) => r.codRecolhimento);
+
+            this.solicitacoesAbertas = solicitacoes.filter(
+              (s) =>
+                s.codRecolhimento !== undefined &&
+                !idsFarmacia.includes(s.codRecolhimento)
+            );
+          },
+          error: (err) =>
+            console.error('Erro ao carregar recolhimentos farmácia', err),
+        });
       },
       error: (err) =>
         console.error('Erro ao carregar solicitações abertas', err),
-    });
-
-    this.recolhimentoService.listarRecolhimentosFarmacia().subscribe({
-      next: (lista) => {
-        this.pendentes = lista.filter((r) => r.status === 'PENDENTE');
-        this.concluidos = lista.filter((r) => r.status === 'CONCLUIDO');
-      },
-      error: (err) =>
-        console.error('Erro ao carregar recolhimentos da farmácia', err),
     });
   }
 
