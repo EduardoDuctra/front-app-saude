@@ -1,0 +1,9 @@
+.titulo-pagina {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--cor-cinza-escuro);
+}
+
+.container {
+  max-width: 1000px;
+}

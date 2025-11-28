@@ -1,0 +1,96 @@
+<mat-card class="card-relatorio p-3 mb-3">
+  <h3 class="titulo-relatorio">
+    {{ modoAdicionar ? "Novo Relatório" : "Relatório - " + dataBR }}
+  </h3>
+
+  <mat-divider></mat-divider>
+
+  <div class="campo">
+    <label>Peso</label>
+
+    <mat-form-field *ngIf="modoAdicionar" appearance="outline" class="w-100">
+      <input matInput type="number" [(ngModel)]="relatorio.peso" />
+    </mat-form-field>
+
+    <p *ngIf="!modoAdicionar">Peso: {{ relatorio.peso }}</p>
+  </div>
+
+  <div class="campo">
+    <label>Glicose</label>
+
+    <mat-form-field *ngIf="modoAdicionar" appearance="outline" class="w-100">
+      <input matInput type="number" [(ngModel)]="relatorio.glicose" />
+    </mat-form-field>
+
+    <p *ngIf="!modoAdicionar">Glicose: {{ relatorio.glicose }}</p>
+  </div>
+
+  <div class="campo">
+    <label>Colesterol HDL</label>
+
+    <mat-form-field *ngIf="modoAdicionar" appearance="outline" class="w-100">
+      <input matInput type="number" [(ngModel)]="relatorio.colesterolHDL" />
+    </mat-form-field>
+
+    <p *ngIf="!modoAdicionar">{{ relatorio.colesterolHDL }}</p>
+  </div>
+
+  <div class="campo">
+    <label>Colesterol VLDL</label>
+
+    <mat-form-field *ngIf="modoAdicionar" appearance="outline" class="w-100">
+      <input matInput type="number" [(ngModel)]="relatorio.colesterolVLDL" />
+    </mat-form-field>
+
+    <p *ngIf="!modoAdicionar">{{ relatorio.colesterolVLDL }}</p>
+  </div>
+
+  <div class="campo">
+    <label>Creatina</label>
+
+    <mat-form-field *ngIf="modoAdicionar" appearance="outline" class="w-100">
+      <input matInput type="number" [(ngModel)]="relatorio.creatina" />
+    </mat-form-field>
+
+    <p *ngIf="!modoAdicionar">{{ relatorio.creatina }}</p>
+  </div>
+
+  <div class="campo">
+    <label>Triglicerídio</label>
+
+    <mat-form-field *ngIf="modoAdicionar" appearance="outline" class="w-100">
+      <input matInput type="number" [(ngModel)]="relatorio.trigliceridio" />
+    </mat-form-field>
+
+    <p *ngIf="!modoAdicionar">{{ relatorio.trigliceridio }}</p>
+  </div>
+
+  <div class="acoes mt-3 d-flex gap-2">
+    <button
+      *ngIf="modoAdicionar"
+      mat-raised-button
+      color="primary"
+      (click)="onSalvar()"
+    >
+      Salvar
+    </button>
+
+    <button
+      *ngIf="modoAdicionar"
+      mat-stroked-button
+      color="warn"
+      (click)="onCancelar()"
+    >
+      Cancelar
+    </button>
+
+    <button
+      *ngIf="!modoAdicionar"
+      mat-raised-button
+      color="warn"
+      (click)="onExcluir()"
+    >
+      Excluir
+    </button>
+  </div>
+</mat-card>

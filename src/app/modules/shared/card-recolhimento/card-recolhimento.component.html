@@ -1,0 +1,18 @@
+<mat-card class="card-recolhimento mb-3 p-3">
+  <div class="titulo">
+    <mat-icon>healing</mat-icon>
+    <span> Recolhimento #{{ item.codRecolhimento }} </span>
+  </div>
+
+  <p><strong>Medicamento:</strong> {{ item.nomeMedicamento }}</p>
+  <p><strong>Email do Cliente:</strong> {{ item.emailCliente }}</p>
+
+  <button
+    mat-raised-button
+    color="primary"
+    class="mt-2 w-100"
+    (click)="onAceitar()"
+  >
+    Aceitar Solicitação
+  </button>
+</mat-card>

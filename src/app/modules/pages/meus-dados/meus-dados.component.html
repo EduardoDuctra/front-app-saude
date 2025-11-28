@@ -1,0 +1,10 @@
+<app-navbar></app-navbar>
+
+<div class="pagina-dados">
+  <app-formulario-usuario
+    *ngIf="usuario || farmacia"
+    [tipoCadastro]="tipoCadastro"
+    [usuario]="usuario"
+    [farmacia]="farmacia"
+  ></app-formulario-usuario>
+</div>

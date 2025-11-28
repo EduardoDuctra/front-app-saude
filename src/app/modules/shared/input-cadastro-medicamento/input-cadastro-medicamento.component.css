@@ -1,0 +1,67 @@
+.card-medicamento {
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+}
+
+.card-medicamento h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--cor-cinza-escuro);
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.mat-mdc-floating-label {
+  color: var(--cor-cinza-escuro) !important;
+  font-weight: 600 !important;
+}
+
+.mdc-notched-outline__leading,
+.mdc-notched-outline__notch,
+.mdc-notched-outline__trailing {
+  border-color: var(--cor-cinza-claro) !important;
+}
+
+.mat-mdc-input-element {
+  font-size: 16px;
+}
+
+mat-error {
+  font-size: 14px;
+  margin-top: 4px;
+  font-weight: 500;
+  color: #d32f2f !important;
+}
+
+button[mat-raised-button] {
+  height: 48px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .card-medicamento {
+    padding: 20px 15px;
+  }
+
+  .card-medicamento h2 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-medicamento {
+    padding: 15px 10px;
+  }
+
+  button[mat-raised-button] {
+    font-size: 16px;
+    height: 44px;
+  }
+}

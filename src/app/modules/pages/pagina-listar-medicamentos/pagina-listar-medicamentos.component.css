@@ -1,0 +1,37 @@
+.pagina-lista-medicamentos {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.titulo-card {
+  padding: 15px 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.lista-medicamentos {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.card-item {
+  padding: 15px 20px !important;
+  border-radius: 14px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.linha-med {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nome-med {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--cor-cinza-escuro);
+}

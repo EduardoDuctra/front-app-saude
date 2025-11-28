@@ -1,0 +1,67 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid pb-4 pt-3">
+  <div class="row g-4">
+    <div class="col-12 col-lg-4 d-flex">
+      <app-container
+        titulo="Solicitações de Recolhimento"
+        imagem="assets/vector.svg"
+        class="dashboard-container"
+      >
+        <div class="lista-cards">
+          <app-card-recolhimento
+            *ngFor="let item of solicitacoesAbertas"
+            [item]="item"
+            (aceitar)="aceitarRecolhimento($event)"
+          >
+          </app-card-recolhimento>
+
+          <p *ngIf="solicitacoesAbertas.length === 0" class="text-muted mt-2">
+            Nenhuma solicitação aberta.
+          </p>
+        </div>
+      </app-container>
+    </div>
+
+    <div class="col-12 col-lg-4 d-flex">
+      <app-container
+        titulo="Recolhimentos Pendentes"
+        imagem="assets/vector (1).svg"
+        class="dashboard-container"
+      >
+        <div class="lista-cards">
+          <app-card-recolhimento-aceito
+            *ngFor="let item of pendentes"
+            [item]="item"
+            (concluir)="concluirRecolhimento($event)"
+          >
+          </app-card-recolhimento-aceito>
+
+          <p *ngIf="pendentes.length === 0" class="text-muted mt-2">
+            Nenhum recolhimento pendente.
+          </p>
+        </div>
+      </app-container>
+    </div>
+
+    <div class="col-12 col-lg-4 d-flex">
+      <app-container
+        titulo="Recolhimentos Concluídos"
+        imagem="assets/vector (1).svg"
+        class="dashboard-container"
+      >
+        <div class="lista-cards">
+          <app-card-recolhimento-aceito
+            *ngFor="let item of concluidos"
+            [item]="item"
+          >
+          </app-card-recolhimento-aceito>
+
+          <p *ngIf="concluidos.length === 0" class="text-muted mt-2">
+            Nenhum recolhimento concluído.
+          </p>
+        </div>
+      </app-container>
+    </div>
+  </div>
+</div>

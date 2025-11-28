@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { GraficoComponent } from './grafico/grafico.component';
 
 @Component({
   selector: 'app-root',

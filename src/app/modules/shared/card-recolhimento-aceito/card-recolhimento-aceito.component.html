@@ -1,0 +1,24 @@
+<mat-card class="card-recolhimento mb-3 p-3">
+  <div class="cabecalho">
+    <mat-icon>inventory_2</mat-icon>
+    <span>Recolhimento #{{ item.codRecolhimento }}</span>
+  </div>
+
+  <p><strong>Medicamento:</strong> {{ item.nomeMedicamento }}</p>
+  <p><strong>Cliente:</strong> {{ item.emailCliente }}</p>
+
+  <p class="status" [ngClass]="item.status">
+    <strong>Status:</strong> {{ item.status }}
+  </p>
+
+  <button
+    mat-raised-button
+    color="primary"
+    *ngIf="item.status === 'PENDENTE'"
+    (click)="concluir.emit(item.codRecolhimento)"
+    class="mt-2"
+  >
+    <mat-icon>check_circle</mat-icon>
+    Concluir Recolhimento
+  </button>
+</mat-card>

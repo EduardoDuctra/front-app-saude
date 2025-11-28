@@ -1,0 +1,16 @@
+<div class="card-usuario">
+  <h3>{{ usuario.perfil.nome }}</h3>
+  <hr />
+  <p><strong>Email:</strong> {{ usuario.conta.email }}</p>
+  <p><strong>Permissão:</strong> {{ usuario.conta.permissao }}</p>
+
+  <ng-container *ngIf="!isFarmacia">
+    <p><strong>Sexo:</strong> {{ usuario.perfil.sexo }}</p>
+    <p><strong>Altura:</strong> {{ usuario.perfil.altura }} m</p>
+  </ng-container>
+
+  <ng-container *ngIf="isFarmacia">
+    <p><strong>CNPJ:</strong> {{ cnpj }}</p>
+    <p><strong>Telefone:</strong> {{ telefone }}</p>
+  </ng-container>
+</div>

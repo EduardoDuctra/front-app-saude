@@ -1,0 +1,123 @@
+<app-modal [show]="show" (close)="fecharModal()">
+  <form
+    *ngIf="formMedicamento"
+    [formGroup]="formMedicamento"
+    (ngSubmit)="onSubmit()"
+  >
+    <h2>{{ modoAdicionar ? "Adicionar Medicação" : "Editar Medicação" }}</h2>
+
+    <label for="nome"><strong>Nome:</strong></label>
+    <select
+      id="nome"
+      formControlName="nomeMedicamento"
+      [disabled]="!modoAdicionar"
+      class="campo-select"
+    >
+      <option value="">Selecione...</option>
+      <option *ngFor="let m of listaMedicamentos" [value]="m.nome">
+        {{ m.nome }}
+      </option>
+    </select>
+    <div
+      class="erro-campo"
+      *ngIf="
+        formMedicamento.get('nomeMedicamento')?.touched &&
+        formMedicamento.get('nomeMedicamento')?.hasError('required')
+      "
+    >
+      Selecione um medicamento.
+    </div>
+
+    <label for="dose">Dose diária:</label>
+    <input
+      id="dose"
+      type="number"
+      formControlName="doseDiaria"
+      placeholder="Dose diária"
+      class="campo-input"
+    />
+    <div
+      class="erro-campo"
+      *ngIf="
+        formMedicamento.get('doseDiaria')?.touched &&
+        formMedicamento.get('doseDiaria')?.hasError('required')
+      "
+    >
+      Informe a dose diária.
+    </div>
+    <div
+      class="erro-campo"
+      *ngIf="
+        formMedicamento.get('doseDiaria')?.touched &&
+        formMedicamento.get('doseDiaria')?.hasError('min')
+      "
+    >
+      A dose deve ser maior que zero.
+    </div>
+
+    <label for="dataInicio">Data de início:</label>
+    <input
+      id="dataInicio"
+      type="date"
+      formControlName="dataInicio"
+      class="campo-input"
+    />
+    <div
+      class="erro-campo"
+      *ngIf="
+        formMedicamento.get('dataInicio')?.touched &&
+        formMedicamento.get('dataInicio')?.hasError('required')
+      "
+    >
+      Informe a data de início.
+    </div>
+
+    <label for="duracao">Duração (dias):</label>
+    <input
+      id="duracao"
+      type="number"
+      formControlName="duracaoTratamento"
+      placeholder="Duração do tratamento"
+      class="campo-input"
+    />
+    <div
+      class="erro-campo"
+      *ngIf="
+        formMedicamento.get('duracaoTratamento')?.touched &&
+        formMedicamento.get('duracaoTratamento')?.hasError('required')
+      "
+    >
+      Informe a duração do tratamento.
+    </div>
+    <div
+      class="erro-campo"
+      *ngIf="
+        formMedicamento.get('duracaoTratamento')?.touched &&
+        formMedicamento.get('duracaoTratamento')?.hasError('min')
+      "
+    >
+      A duração deve ser maior que zero.
+    </div>
+
+    <div class="botoes-modal">
+      <button class="btn-salvar" type="submit">Salvar</button>
+
+      <button
+        class="btn-excluir"
+        type="button"
+        *ngIf="!modoAdicionar"
+        (click)="excluir()"
+      >
+        Excluir
+      </button>
+
+      <button
+        class="btn-recolhimento"
+        type="button"
+        (click)="solicitarRecolhimento()"
+      >
+        Solicitar recolhimento
+      </button>
+    </div>
+  </form>
+</app-modal>
