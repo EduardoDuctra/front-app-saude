@@ -18,7 +18,14 @@ export class DashboardComponent implements OnInit {
   modalAberto = false;
   modalTitulo = '';
   usuario: any = { medicamentos: [], dados: [], relatorios: [] };
-  botoes: string[] = [];
+  botoes: string[] = [
+    'Peso',
+    'Glicose',
+    'Colesterol HDL',
+    'Colesterol VLDL',
+    'Creatina',
+    'Triglicerídio',
+  ];
   data: any = { labels: [], datasets: [] };
 
   show = false; //modal
@@ -44,34 +51,15 @@ export class DashboardComponent implements OnInit {
     this.dadosService.listarDadosUsuario().subscribe({
       next: (dados: DadosDTO[]) => {
         this.usuario.dados = dados;
-        console.log('Dados do usuário:', this.usuario.dados);
-
-        //botões com os campos que vem do backend
-        if (dados.length > 0) {
-          const campos = dados[0];
-          this.botoes = [];
-
-          if (campos.peso !== undefined) this.botoes.push('Peso');
-          if (campos.glicose !== undefined) this.botoes.push('Glicose');
-          if (campos.colesterolHDL !== undefined)
-            this.botoes.push('Colesterol HDL');
-          if (campos.colesterolVLDL !== undefined)
-            this.botoes.push('Colesterol VLDL');
-          if (campos.creatina !== undefined) this.botoes.push('Creatina');
-          if (campos.trigliceridio !== undefined)
-            this.botoes.push('Triglicerídio');
-        }
       },
       error: (err) => console.error('Erro ao carregar dados', err),
     });
   }
-
   //lista de objetos medicamento DTO associados ao usuario logado
   carregarMedicamentos() {
     this.medService.listarMedicamentosUsuario().subscribe({
       next: (meds: MedicamentoDTO[]) => {
         this.usuario.medicamentos = meds;
-        console.log('Medicamentos do usuário:', this.usuario.medicamentos);
       },
       error: (err) => console.error('Erro ao carregar medicamentos', err),
     });

@@ -24,13 +24,13 @@ export class PaginaUsuariosComponent {
   ) {}
 
   ngOnInit(): void {
-    //pego o tipo que veio na url para saber qual DTO mostrar
     this.route.paramMap.subscribe((params) => {
       const tipoParam = params.get('tipo');
       if (!tipoParam) return;
 
       this.tipo = tipoParam;
 
+      // 🎯 ESTE TRECHO VAI AQUI!
       if (this.tipo === 'farmacia') {
         this.farmaciaService.listarFarmacias().subscribe({
           next: (dados) => (this.listaUsuarios = dados),

@@ -30,8 +30,6 @@ export class PaginaListarMedicamentosComponent {
       .deletarMedicamento(med.codNomeMedicamento!)
       .subscribe({
         next: () => {
-          console.log('Medicamento excluído:', med.nome);
-
           //atualiza a lista
           this.listaMedicamentos = this.listaMedicamentos.filter(
             (m) => m !== med

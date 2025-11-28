@@ -30,13 +30,10 @@ export class InputCadastroMedicamentoComponent implements OnInit {
 
   onSubmit(): void {
     if (this.medicamentoForm.valid) {
-      console.log('Medicamento cadastrado:', this.medicamentoForm.value);
       this.bancoMedicamentoService
         .cadastrarMedicamento(this.medicamentoForm.value)
         .subscribe({
           next: (res) => {
-            console.log('Medicamento cadastrado:', res);
-
             this.medicamentoForm.reset();
             this.router.navigate(['/dashboard']);
           },

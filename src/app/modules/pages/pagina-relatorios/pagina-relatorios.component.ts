@@ -13,25 +13,36 @@ export class PaginaRelatoriosComponent implements OnInit {
   carregando = false;
   erro = '';
 
-  //para saber se é criar ou update o objeto
   novoRelatorioAtivo = false;
-  relatorioNovo: RelatorioCompletoDTO = {
-    data: new Date().toISOString().split('T')[0],
-  };
+
+  relatorioNovo: RelatorioCompletoDTO = this.criarModeloRelatorio();
 
   constructor(private relatoriosService: RelatoriosService) {}
 
-  //carerga todos os relatórios
   ngOnInit(): void {
     this.carregarRelatorios();
   }
 
-  //lista os relatórios do usuário logado (acessa o service)
+  //crio um relatório inicicial para ser preenchido
+  private criarModeloRelatorio(): RelatorioCompletoDTO {
+    return {
+      data: new Date().toISOString().split('T')[0],
+      peso: undefined,
+      glicose: undefined,
+      colesterolHDL: undefined,
+      colesterolVLDL: undefined,
+      creatina: undefined,
+      trigliceridio: undefined,
+    };
+  }
+
+  //carrega os relatórios do usuário
   carregarRelatorios(): void {
     this.carregando = true;
+
     this.relatoriosService.listarTodosRelatoriosUsuarioLogado().subscribe({
       next: (res) => {
-        this.relatorios = res;
+        this.relatorios = res ?? [];
         this.carregando = false;
       },
       error: (err) => {
@@ -53,12 +64,10 @@ export class PaginaRelatoriosComponent implements OnInit {
       trigliceridio: relatorio.trigliceridio,
     };
 
-    console.log('Relatório a ser enviado para o backend:', relatorioSalvar);
-
     this.relatoriosService.salvarRelatorio(relatorioSalvar).subscribe({
       next: (relatorioSalvo) => {
-        console.log('Relatório salvo no backend:', relatorioSalvo);
-        this.relatorios.push(relatorioSalvo);
+        //coloca o novo relatório na lista exibida na tela
+        this.relatorios = [...this.relatorios, relatorioSalvo];
         this.novoRelatorioAtivo = false;
         this.resetarRelatorioNovo();
       },
@@ -66,15 +75,7 @@ export class PaginaRelatoriosComponent implements OnInit {
     });
   }
 
-  //sempre que abrir o form de novo relatório, reseta os campos
   resetarRelatorioNovo() {
-    this.relatorioNovo = {
-      data: new Date().toISOString().split('T')[0],
-    };
-  }
-
-  cancelarNovoRelatorio() {
-    this.novoRelatorioAtivo = false;
-    this.resetarRelatorioNovo();
+    this.relatorioNovo = this.criarModeloRelatorio();
   }
 }

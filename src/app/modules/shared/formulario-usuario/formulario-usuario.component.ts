@@ -46,75 +46,58 @@ export class FormularioUsuarioComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     //detecta mudanças que ocorreram no comp pai (observable)
-    console.log('ngOnChanges chamado:', changes);
+    //notifica o comp filho
     if (changes['usuario'] && this.usuario) {
-      console.log(
-        'usuario recebido no FormularioUsuarioComponent:',
-        this.usuario
-      );
       this.isEditing = true;
       this.inicializarFormulario();
     }
   }
 
   private inicializarFormulario(): void {
-    //bloco de cadastro e validação form
-    //tem os validadores e os campos obrigatórios
+    // Se for cadastro ou edição de farmácia
+    if (this.tipoCadastro === 'farmacia') {
+      const farmaciaData = this.farmacia || {
+        usuario: {
+          perfil: { nome: '' },
+          conta: { email: '', senha: '' },
+        },
+        cnpj: '',
+        telefone: '',
+      };
 
-    //campo para farmácia
-    //preenche os campos sexo e altura com valores pre definidos automaticamente
-    if (this.tipoCadastro === 'farmacia' && this.farmacia) {
-      const farmacia = this.farmacia;
-
+      //formGroup
       this.usuarioForm = this.fb.group({
-        //FORM OBJETO USUARIO
         perfil: this.fb.group({
-          //nome obirgatório
-          nome: [farmacia.usuario.perfil.nome || '', Validators.required],
-
-          //definidos automatico (o usuario nem vai ver isso)
-          sexo: ['I', Validators.required],
-          altura: [0.0, Validators.required],
+          nome: [farmaciaData.usuario.perfil.nome, Validators.required],
+          sexo: ['I', Validators.required], // sexo fixo
+          altura: [0.0, Validators.required], // altura fixa
         }),
 
-        //aqui o usuário altera os dados como email, senha, cnpj e telefone
+        //crio o objeto USUARIO
         conta: this.fb.group({
-          //email e senha obrigatórios
           email: [
-            farmacia.usuario.conta.email || '',
+            farmaciaData.usuario.conta.email,
             [Validators.required, Validators.email],
           ],
-          senha: [farmacia.usuario.conta.senha || '', Validators.required],
-
+          senha: [farmaciaData.usuario.conta.senha, Validators.required],
           permissao: ['ROLE_FARMACIA', Validators.required],
         }),
 
-        //campos só da farmácia
-        cnpj: [farmacia.cnpj || '', Validators.required],
-        telefone: [farmacia.telefone || '', Validators.required],
+        cnpj: [farmaciaData.cnpj, Validators.required],
+        telefone: [farmaciaData.telefone, Validators.required],
       });
+
       return;
     }
 
-    //para usuarios normais
-    //altera os dados do perfil
+    // Caso contrário, cadastro/edição de usuário normal
     this.usuarioForm = this.fb.group({
       perfil: this.fb.group({
-        //nome obrigatório
         nome: [this.usuario?.perfil.nome || '', Validators.required],
-        sexo: [
-          //pego o sexo se existir, se não existir, M é o padrão
-          this.usuario?.perfil.sexo || 'M',
-          Validators.required,
-        ],
-        altura: [
-          //pego a altura se existir, se não existir, null
-          this.usuario?.perfil.altura || null,
-          Validators.required,
-        ],
+        sexo: [this.usuario?.perfil.sexo || 'M', Validators.required],
+        altura: [this.usuario?.perfil.altura || null, Validators.required],
       }),
 
-      //crio o objeto CONTA (backend)
       conta: this.fb.group({
         email: [
           this.usuario?.conta.email || '',
@@ -122,18 +105,17 @@ export class FormularioUsuarioComponent implements OnInit, OnChanges {
         ],
         senha: [this.usuario?.conta.senha || '', Validators.required],
         permissao: [
-          this.usuario?.conta.permissao ||
-            (this.tipoCadastro === 'farmacia' ? 'ROLE_FARMACIA' : 'usuario'),
+          this.usuario?.conta.permissao || 'usuario',
           Validators.required,
         ],
       }),
 
-      //aqui coloco os campos a mais para farmacia
-      cnpj: [this.tipoCadastro === 'farmacia' ? '' : null],
-      telefone: [this.tipoCadastro === 'farmacia' ? '' : null],
+      cnpj: [null],
+      telefone: [null],
     });
   }
 
+  //ação que ocorre quando enviar o formulario
   onSubmit(): void {
     if (!this.usuarioForm.valid) {
       alert('Preencha todos os campos obrigatórios!');
@@ -142,8 +124,9 @@ export class FormularioUsuarioComponent implements OnInit, OnChanges {
 
     const formValue = this.usuarioForm.value;
 
+    //quando eu envio, vejo se é um usuario do tipo farmacia para criar o objeto Farmacia
     if (this.tipoCadastro === 'farmacia') {
-      const farmaciaPayload = {
+      const farmaciaForm = {
         usuario: {
           perfil: formValue.perfil,
           conta: formValue.conta,
@@ -154,7 +137,7 @@ export class FormularioUsuarioComponent implements OnInit, OnChanges {
 
       //se existe -> update
       if (this.isEditing) {
-        this.farmaciaService.atualizarFarmacia(farmaciaPayload).subscribe({
+        this.farmaciaService.atualizarFarmacia(farmaciaForm).subscribe({
           next: () => {
             alert('Farmácia atualizada com sucesso!');
             this.router.navigate(['/dashboard']);
@@ -163,7 +146,7 @@ export class FormularioUsuarioComponent implements OnInit, OnChanges {
         });
       } else {
         //não existe -> post/salvar
-        this.farmaciaService.salvarFarmacia(farmaciaPayload).subscribe({
+        this.farmaciaService.salvarFarmacia(farmaciaForm).subscribe({
           next: () => {
             alert('Farmácia salva com sucesso!');
             this.router.navigate(['/login']);

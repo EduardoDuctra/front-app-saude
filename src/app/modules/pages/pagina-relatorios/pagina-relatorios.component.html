@@ -4,15 +4,11 @@
   <button class="botao-redondo" (click)="novoRelatorioAtivo = true">+</button>
 </div>
 
-<div *ngIf="carregando">Carregando relatórios...</div>
-<div *ngIf="erro">{{ erro }}</div>
-
 <app-card-relatorio
   *ngIf="novoRelatorioAtivo"
   [relatorio]="relatorioNovo!"
   [modoAdicionar]="true"
   (salvar)="salvarNovoRelatorio($event)"
-  (cancelar)="cancelarNovoRelatorio()"
 ></app-card-relatorio>
 
 <div class="cards-relatorios" *ngIf="!carregando && relatorios.length > 0">
@@ -20,8 +16,4 @@
     *ngFor="let relatorio of relatorios"
     [relatorio]="relatorio"
   ></app-card-relatorio>
-</div>
-
-<div *ngIf="!carregando && relatorios.length === 0">
-  Nenhum relatório encontrado.
 </div>

@@ -102,7 +102,6 @@ export class ModalMedicamentoComponent implements OnInit, OnChanges {
 
     this.recolhimentoService.solicitarRecolhimento(recolhimento).subscribe({
       next: (res) => {
-        console.log('Recolhimento solicitado:', res);
         this.fecharModal();
         alert('Recolhimento solicitado com sucesso!');
       },

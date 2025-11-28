@@ -43,7 +43,9 @@
           </div>
           <mat-divider></mat-divider>
 
-          <ng-container *ngIf="userRole !== 'ROLE_ADMIN'">
+          <ng-container
+            *ngIf="userRole !== 'ROLE_ADMIN' && userRole !== 'ROLE_FARMACIA'"
+          >
             <button mat-menu-item (click)="meusDados()">
               <mat-icon>person</mat-icon> <span>Meus Dados</span>
             </button>
@@ -52,6 +54,12 @@
               <mat-icon>analytics</mat-icon> <span>Meus Relatórios</span>
             </button>
 
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>logout</mat-icon> <span>Sair</span>
+            </button>
+          </ng-container>
+
+          <ng-container *ngIf="userRole === 'ROLE_FARMACIA'">
             <button mat-menu-item (click)="logout()">
               <mat-icon>logout</mat-icon> <span>Sair</span>
             </button>

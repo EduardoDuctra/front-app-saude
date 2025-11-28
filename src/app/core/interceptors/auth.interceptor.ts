@@ -21,7 +21,12 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const token = this.authService.getToken();
 
-    if (req.url.endsWith('/login')) {
+    //rotas liberadas
+    if (
+      req.url.endsWith('/login') ||
+      req.url.includes('/usuario/salvar') ||
+      req.url.includes('/farmacia/salvar')
+    ) {
       return next.handle(req);
     }
 

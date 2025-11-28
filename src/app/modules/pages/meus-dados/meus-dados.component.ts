@@ -27,8 +27,6 @@ export class MeusDadosComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioService.carregarUsuarioLogado().subscribe({
       next: (usuario) => {
-        console.log('Usuario carregado no MeusDadosComponent:', usuario);
-
         //listar o tipo de form de acordo com o tipo de usuário
         this.tipoCadastro =
           usuario.conta.permissao === 'farmacia' ? 'farmacia' : 'usuario';

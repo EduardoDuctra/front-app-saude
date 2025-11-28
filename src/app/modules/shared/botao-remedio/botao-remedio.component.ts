@@ -13,9 +13,7 @@ export class BotaoRemedioComponent {
   @Input() dataInicio!: string;
   @Input() duracao!: number;
 
-  ngOnInit() {
-    console.log('Nome do remédio recebido:', this.nome);
-  }
+  ngOnInit() {}
 
   //usuario informa a quantidade de dias e calcula a data final
   get dataFim(): string {

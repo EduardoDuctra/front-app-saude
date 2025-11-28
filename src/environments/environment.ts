@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/sistema-saude',
+  apiUrl: 'http://localhost:8081/sistema-saude',
 };
