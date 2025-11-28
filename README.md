@@ -38,3 +38,30 @@ Comando para inicializar a aplicação:
 ```json
 npm start
 ```
+
+
+
+Cadastro de usuário ADMIN
+
+url no insominia:
+
+```json
+http://localhost:8081/sistema-saude/usuario/salvar
+```
+
+json para inserir:
+
+```json
+{
+  "conta": {
+    "email": "e@email.com",
+    "senha": "123",
+    "permissao": "ROLE_ADMIN"
+  },
+  "perfil": {
+    "nome": "Administrador",
+    "sexo": "M",
+    "altura": 1.8
+  }
+}
+```
