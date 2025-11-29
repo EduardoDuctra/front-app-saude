@@ -82,17 +82,15 @@ export class LoginComponent implements OnInit {
 
             const role = usuario.conta.permissao;
 
-            //redireciona para essas páginas
+            //redireciona para as páginas certas
             if (role === 'ROLE_FARMACIA') {
               this.router.navigate(['/dashboard-farmacia']);
             } else {
               this.router.navigate(['/dashboard']);
             }
           },
-          error: () => alert('Erro ao carregar perfil do usuário.'),
         });
       },
-      error: () => alert('Email ou senha incorretos!'),
     });
   }
 }

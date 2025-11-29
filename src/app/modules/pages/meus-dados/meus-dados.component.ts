@@ -29,7 +29,7 @@ export class MeusDadosComponent implements OnInit {
       next: (usuario) => {
         //listar o tipo de form de acordo com o tipo de usuário
         this.tipoCadastro =
-          usuario.conta.permissao === 'farmacia' ? 'farmacia' : 'usuario';
+          usuario.conta.permissao === 'ROLE_FARMACIA' ? 'farmacia' : 'usuario';
 
         //se for de farmacia chama o service dela, pq tem dados difetentes
         if (this.tipoCadastro === 'farmacia') {
@@ -38,14 +38,12 @@ export class MeusDadosComponent implements OnInit {
               this.farmacia = farmacia;
               this.usuario = farmacia.usuario;
             },
-            error: (err) => console.error('Erro ao carregar farmácia:', err),
           });
         } else {
           //se for usuário comum, carrega os dados normais
           this.usuario = usuario;
         }
       },
-      error: (err) => console.error('Erro ao carregar usuário:', err),
     });
   }
 }

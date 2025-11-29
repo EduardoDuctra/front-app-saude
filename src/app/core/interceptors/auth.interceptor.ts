@@ -30,13 +30,14 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
+    //se tiver logado/tiver token colcoa no BEARER
     if (token) {
-      const reqClonada = req.clone({
+      const autorizacao = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`,
         },
       });
-      return next.handle(reqClonada);
+      return next.handle(autorizacao);
     }
 
     return next.handle(req);

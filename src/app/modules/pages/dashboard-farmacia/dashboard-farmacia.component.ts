@@ -38,12 +38,12 @@ export class DashboardFarmaciaComponent implements OnInit {
             );
 
             //verificação para nao ter duplicação. Garante que um recolhimento concluido nao vai estar na aba pendente (filtro no front)
-            const idsFarmacia = listaFarmacia.map((r) => r.codRecolhimento);
+            const idFarmacia = listaFarmacia.map((r) => r.codRecolhimento);
 
             this.solicitacoesAbertas = solicitacoes.filter(
               (s) =>
                 s.codRecolhimento !== undefined &&
-                !idsFarmacia.includes(s.codRecolhimento)
+                !idFarmacia.includes(s.codRecolhimento)
             );
           },
           error: (err) =>

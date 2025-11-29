@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
     private usuarioService: UsuarioService
   ) {}
 
-  //carrega o componente e: carrega os medicamentos + dados
+  //carrega o componente: carrega os medicamentos + dados
   ngOnInit(): void {
     this.carregarMedicamentos();
     this.carregarDados();
@@ -120,11 +120,11 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  atualizarListaMedicamento(updated: MedicamentoDTO) {
+  atualizarListaMedicamento(atualizado: MedicamentoDTO) {
     const index = this.usuario.medicamentos.findIndex(
-      (m: MedicamentoDTO) => m.codMedicamento === updated.codMedicamento
+      (m: MedicamentoDTO) => m.codMedicamento === atualizado.codMedicamento
     );
-    if (index >= 0) this.usuario.medicamentos[index] = updated;
+    if (index >= 0) this.usuario.medicamentos[index] = atualizado;
   }
 
   removerDaLista(codMedicamento: number) {

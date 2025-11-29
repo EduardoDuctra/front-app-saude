@@ -13,6 +13,7 @@ export class RelatoriosService {
 
   constructor(private http: HttpClient) {}
 
+  //envio o tipo de dado (string) pela url para o backend
   listarPorTipo(tipoDado: string): Observable<RelatoriosDTO[]> {
     return this.http.get<RelatoriosDTO[]>(
       `${this.baseUrl}/listar-por-tipo?tipoDado=${tipoDado}`
@@ -25,10 +26,13 @@ export class RelatoriosService {
     );
   }
 
+  //envio o objeto RelatorioCompletoDTO para o backend
+  // o backend espera um objeto com data e dados (com os valores numéricos não pode ser null pq da erro)
+  //atribuo os valores com base nos campos do form
   salvarRelatorio(
     relatorio: RelatorioCompletoDTO
   ): Observable<RelatorioCompletoDTO> {
-    const payload = {
+    const conteudoBackend = {
       data: relatorio.data,
       dados: {
         peso: Number(relatorio.peso),
@@ -42,7 +46,7 @@ export class RelatoriosService {
 
     return this.http.post<RelatorioCompletoDTO>(
       `${this.baseUrl}/salvar`,
-      payload
+      conteudoBackend
     );
   }
 }

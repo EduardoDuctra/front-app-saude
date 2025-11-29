@@ -17,6 +17,7 @@ export class UsuarioService {
     return this.http.get<IMCDTO>(`${this.baseUrl}/imc`);
   }
 
+  //envio o objeto usuario para o backend pelo body da requisição
   salvarUsuario(usuario: any): Observable<DadoUsuarioDTO> {
     return this.http.post<DadoUsuarioDTO>(`${this.baseUrl}/salvar`, usuario);
   }

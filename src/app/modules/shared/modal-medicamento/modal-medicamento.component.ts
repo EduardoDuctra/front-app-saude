@@ -54,7 +54,6 @@ export class ModalMedicamentoComponent implements OnInit, OnChanges {
           this.listaMedicamentos.map((m) => m.nome)
         );
       },
-      error: (err) => console.error('Erro ao carregar medicamentos', err),
     });
   }
 
@@ -64,6 +63,7 @@ export class ModalMedicamentoComponent implements OnInit, OnChanges {
     }
   }
 
+  //form com validadores e campos obrigatorios
   private criarFormulario() {
     this.formMedicamento = this.fb.group({
       nomeMedicamento: ['', Validators.required],
@@ -75,6 +75,9 @@ export class ModalMedicamentoComponent implements OnInit, OnChanges {
     this.preencherFormulario();
   }
 
+  // Preenche o formulário com os dados do medicamento para edição
+  //nãao aceita null
+  //pego os dados do DTO e coloco no form
   private preencherFormulario() {
     if (!this.medicamento) return;
 
@@ -92,7 +95,6 @@ export class ModalMedicamentoComponent implements OnInit, OnChanges {
 
   solicitarRecolhimento() {
     if (!this.medicamento?.codMedicamento) {
-      console.error('Nenhum medicamento selecionado.');
       return;
     }
 
@@ -103,9 +105,7 @@ export class ModalMedicamentoComponent implements OnInit, OnChanges {
     this.recolhimentoService.solicitarRecolhimento(recolhimento).subscribe({
       next: (res) => {
         this.fecharModal();
-        alert('Recolhimento solicitado com sucesso!');
       },
-      error: (err) => console.error('Erro ao solicitar recolhimento', err),
     });
   }
 
@@ -126,7 +126,6 @@ export class ModalMedicamentoComponent implements OnInit, OnChanges {
     );
 
     if (!selecionado) {
-      console.error('Nenhum medicamento selecionado no dropdown.');
       return;
     }
 
@@ -150,7 +149,6 @@ export class ModalMedicamentoComponent implements OnInit, OnChanges {
           this.medicamentoAdicionado.emit(novo);
           this.fecharModal();
         },
-        error: (err) => console.error('Erro ao adicionar medicamento', err),
       });
     } else {
       this.medService.atualizarMedicamento(objetoParaEnviar).subscribe({
@@ -159,7 +157,6 @@ export class ModalMedicamentoComponent implements OnInit, OnChanges {
           this.fecharModal();
           window.location.reload();
         },
-        error: (err) => console.error('Erro ao atualizar medicamento', err),
       });
     }
   }
@@ -174,7 +171,6 @@ export class ModalMedicamentoComponent implements OnInit, OnChanges {
           this.medicamentoRemovido.emit(this.medicamento!.codMedicamento!);
           this.fecharModal();
         },
-        error: (err) => console.error('Erro ao excluir medicamento', err),
       });
   }
 }
