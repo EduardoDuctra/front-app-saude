@@ -1,9 +1,11 @@
 # Sistema Saúde – Frontend (Angular)
+
 Segunda Entrega – **POOW2 – UFSM**
 
 Este repositório contém a **interface web (Frontend Angular)** do Sistema Saúde, desenvolvido para a segunda entrega da disciplina de Programação Orientada a Objetos Web 2 (POOW2).
 
 A aplicação permite realizar:
+
 - Cadastro e login de usuários
 - Cadastro e login de farmácias
 - Autenticação via JWT
@@ -15,41 +17,39 @@ A aplicação permite realizar:
 # 🚀 Tecnologias Utilizadas
 
 ### **Frontend**
-- Angular 17  
-- Angular Material  
-- Bootstrap  
-- TypeScript  
-- Reactive Forms  
-- Guards & Interceptors  
+
+- Angular 17
+- Angular Material
+- Bootstrap
+- TypeScript
+- Reactive Forms
+- Guards & Interceptors
 - HttpClient
 
 ### **Backend (API da Segunda Entrega)**
-- Spring Boot 
-- Spring Security (JWT)  
-- PostgreSQL  
-- Flyway  
 
+- Spring Boot
+- Spring Security (JWT)
+- PostgreSQL
+- Flyway
 
 ---
 
-
 Comando para inicializar a aplicação:
 
-```json
+```JSON
 npm start
 ```
 
-
-
 Cadastro de usuário ADMIN
 
-url no insominia:
+URL no insomnia:
 
 ```json
 http://localhost:8081/sistema-saude/usuario/salvar
 ```
 
-json para inserir:
+JSON para inserir:
 
 ```json
 {
