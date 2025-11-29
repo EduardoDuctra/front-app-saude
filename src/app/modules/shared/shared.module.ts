@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// Forms
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-// Angular Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatOptionModule, MatNativeDateModule } from '@angular/material/core';

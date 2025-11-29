@@ -21,7 +21,6 @@ export class PaginaListarMedicamentosComponent {
   carregarMedicamentos(): void {
     this.bancoMedicamentoService.listarMedicamentos().subscribe({
       next: (res) => (this.listaMedicamentos = res),
-      error: (err) => console.error('Erro ao carregar medicamentos:', err),
     });
   }
 
@@ -35,7 +34,6 @@ export class PaginaListarMedicamentosComponent {
             (m) => m !== med
           );
         },
-        error: (err) => console.error('Erro ao excluir medicamento:', err),
       });
   }
 }

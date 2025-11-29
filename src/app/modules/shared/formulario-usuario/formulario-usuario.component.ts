@@ -142,7 +142,6 @@ export class FormularioUsuarioComponent implements OnInit, OnChanges {
             alert('Farmácia atualizada com sucesso!');
             this.router.navigate(['/dashboard']);
           },
-          error: (err) => console.error(err),
         });
       } else {
         //não existe -> post/salvar
@@ -151,7 +150,6 @@ export class FormularioUsuarioComponent implements OnInit, OnChanges {
             alert('Farmácia salva com sucesso!');
             this.router.navigate(['/login']);
           },
-          error: (err) => console.error(err),
         });
       }
     } else {
@@ -167,7 +165,6 @@ export class FormularioUsuarioComponent implements OnInit, OnChanges {
             alert('Dados atualizados com sucesso!');
             this.router.navigate(['/dashboard']);
           },
-          error: (err) => console.error(err),
         });
       } else {
         //não existe -> post/salvar
@@ -176,7 +173,6 @@ export class FormularioUsuarioComponent implements OnInit, OnChanges {
             alert('Usuário salvo com sucesso!');
             this.router.navigate(['/login']);
           },
-          error: (err) => console.error(err),
         });
       }
     }

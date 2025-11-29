@@ -26,6 +26,7 @@ export class RecolhimentoService {
     );
   }
 
+  // envio o codRecolhimento e o novo status pela URL para o backend. Atualizo o status no backend
   atualizarStatus(
     codRecolhimento: number,
     novoStatus: 'PENDENTE' | 'CONCLUIDO' | 'CANCELADO'

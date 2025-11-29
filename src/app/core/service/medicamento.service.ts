@@ -18,9 +18,11 @@ export class MedicamentoService {
     );
   }
 
+  //envio um objeto medicamento com o codMedicamento para atualizar
   atualizarMedicamento(
     med: MedicamentoDTO & { codMedicamento: number }
   ): Observable<MedicamentoDTO> {
+    //envio para o backend o objeto medicamentoDTO (med)
     return this.http.put<MedicamentoDTO>(`${this.baseUrl}/atualizar`, med);
   }
 

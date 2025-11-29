@@ -37,7 +37,6 @@ export class InputCadastroMedicamentoComponent implements OnInit {
             this.medicamentoForm.reset();
             this.router.navigate(['/dashboard']);
           },
-          error: (err) => console.error('Erro ao cadastrar:', err),
         });
     }
   }

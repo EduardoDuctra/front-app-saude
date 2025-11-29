@@ -30,16 +30,13 @@ export class PaginaUsuariosComponent {
 
       this.tipo = tipoParam;
 
-      // 🎯 ESTE TRECHO VAI AQUI!
       if (this.tipo === 'farmacia') {
         this.farmaciaService.listarFarmacias().subscribe({
           next: (dados) => (this.listaUsuarios = dados),
-          error: (err) => console.error('Erro ao carregar farmácias', err),
         });
       } else {
         this.usuarioService.listarUsuarios().subscribe({
           next: (dados) => (this.listaUsuarios = dados),
-          error: (err) => console.error('Erro ao carregar usuários', err),
         });
       }
     });
