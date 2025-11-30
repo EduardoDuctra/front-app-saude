@@ -3,6 +3,7 @@
 Segunda Entrega – **POOW2 – UFSM**
 
 Este repositório contém a **interface web (Frontend Angular)** do Sistema Saúde, desenvolvido para a segunda entrega da disciplina de Programação Orientada a Objetos Web 2 (POOW2).
+O projeto utiliza Angular Material como base para componentes essenciais (inputs, cards, form fields, botões, diálogos). Além disso, também foram criados componentes personalizados.
 
 A aplicação permite realizar:
 
